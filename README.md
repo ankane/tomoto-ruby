@@ -1,6 +1,6 @@
-# Tomoto
+# tomoto
 
-[Tomoto](https://github.com/bab2min/tomotopy) - high performance topic modeling - for Ruby
+[tomoto](https://github.com/bab2min/tomotopy) - high performance topic modeling - for Ruby
 
 ## Installation
 
@@ -93,7 +93,7 @@ model.add_doc(["tokens", "from", "document", "one"])
 
 ## Performance
 
-Tomoto uses AVX2, AVX, or SSE2 instructions to increase performance on machines that support it. Check what it’s using with:
+tomoto uses AVX2, AVX, or SSE2 instructions to increase performance on machines that support it. Check what it’s using with:
 
 ```ruby
 Tomoto.isa
