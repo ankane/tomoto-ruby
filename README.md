@@ -10,7 +10,7 @@ Add this line to your application’s Gemfile:
 gem 'tomoto'
 ```
 
-It can take around 10 minutes to compile the extension.
+It can take 10-20 minutes to compile the extension.
 
 ## Getting Started
 
