@@ -1,0 +1,9 @@
+[submodule "vendor/eigen"]
+	path = vendor/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+[submodule "vendor/EigenRand"]
+	path = vendor/EigenRand
+	url = https://github.com/bab2min/EigenRand.git
+[submodule "vendor/tomotopy"]
+	path = vendor/tomotopy
+	url = https://github.com/bab2min/tomotopy.git
