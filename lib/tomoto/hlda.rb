@@ -23,6 +23,16 @@ module Tomoto
       _live_topic?(topic_id)
     end
 
+    def num_docs_of_topic(topic_id)
+      check_topic(topic_id)
+      _num_docs_of_topic(topic_id)
+    end
+
+    def parent_topic(topic_id)
+      check_topic(topic_id)
+      _live_topic?(topic_id) ? _parent_topic(topic_id) : -1
+    end
+
     private
 
     def check_topic(topic_id)

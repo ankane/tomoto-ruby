@@ -544,6 +544,16 @@ void Init_ext()
       "_live_topic?",
       *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
         return self.isLiveTopic(topic_id);
+      })
+    .define_method(
+      "_num_docs_of_topic",
+      *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
+        return self.getNumDocsOfTopic(topic_id);
+      })
+    .define_method(
+      "_parent_topic",
+      *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
+        return self.getParentTopicId(topic_id);
       });
 
   Class rb_cPA = define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(rb_mTomoto, "PA")

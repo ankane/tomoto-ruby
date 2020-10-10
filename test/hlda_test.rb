@@ -12,5 +12,7 @@ class HLDATest < Minitest::Test
     refute model.live_topic?(0)
     assert_in_delta 0.1, model.gamma
     assert_equal 0, model.live_k
+    assert_equal 0, model.num_docs_of_topic(0)
+    assert_equal -1, model.parent_topic(0)
   end
 end
