@@ -7,5 +7,18 @@ module Tomoto
       model.instance_variable_set(:@rm_top, rm_top)
       model
     end
+
+    def correlations(topic_id = nil)
+      prepare
+      if topic_id
+        _correlations(topic_id)
+      else
+        k.times.map { |i| _correlations(i) }
+      end
+    end
+
+    def prior_cov
+      _prior_cov.each_slice(k).to_a
+    end
   end
 end

@@ -328,6 +328,11 @@ void Init_ext()
         return tomoto::ICTModel::create((tomoto::TermWeight)tw, k, alpha, eta, seed);
       })
     .define_method(
+      "_correlations",
+      *[](tomoto::ICTModel& self, tomoto::Tid topic_id) {
+        return self.getCorrelationTopic(topic_id);
+      })
+    .define_method(
       "num_beta_sample",
       *[](tomoto::ICTModel& self) {
         return self.getNumBetaSample();
@@ -350,7 +355,7 @@ void Init_ext()
         return value;
       })
     .define_method(
-      "prior_cov",
+      "_prior_cov",
       *[](tomoto::ICTModel& self) {
         return self.getPriorCov();
       })
@@ -713,7 +718,7 @@ void Init_ext()
         return self.getF();
       })
     .define_method(
-      "var_type",
+      "_var_type",
       *[](tomoto::ISLDAModel& self, size_t var_id) {
         if (var_id >= self.getF()) throw std::runtime_error{ "'var_id' must be < 'f'" };
         return self.getTypeOfVar(var_id) == tomoto::ISLDAModel::GLM::linear ? "l" : "b";
