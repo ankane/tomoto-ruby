@@ -72,8 +72,11 @@ module Tomoto
         topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
           summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
         end
-        # skip ending |
+        summary << "|"
       end
+
+      # skip ending |
+      summary.pop
 
       summary.join("\n")
     end
