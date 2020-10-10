@@ -449,6 +449,56 @@ void Init_ext()
       "_add_doc",
       *[](tomoto::IMGLDAModel& self, std::vector<std::string> words, std::string delimiter) {
         self.addDoc(words, delimiter);
+      })
+    .define_method(
+      "alpha_g",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getAlpha();
+      })
+    .define_method(
+      "alpha_l",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getAlphaL();
+      })
+    .define_method(
+      "alpha_mg",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getAlphaM();
+      })
+    .define_method(
+      "alpha_ml",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getAlphaML();
+      })
+    .define_method(
+      "eta_g",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getEta();
+      })
+    .define_method(
+      "eta_l",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getEtaL();
+      })
+    .define_method(
+      "gamma",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getGamma();
+      })
+    .define_method(
+      "k_g",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getK();
+      })
+    .define_method(
+      "k_l",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getKL();
+      })
+    .define_method(
+      "t",
+      *[](tomoto::IMGLDAModel& self) {
+        return self.getT();
       });
 
   Class rb_cLLDA = define_class_under<tomoto::ILLDAModel, tomoto::ILDAModel>(rb_mTomoto, "LLDA")
