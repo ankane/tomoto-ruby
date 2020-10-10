@@ -231,6 +231,11 @@ void Init_ext()
         self.train(iteration, workers, (tomoto::ParallelScheme)ps);
       })
     .define_method(
+      "_tw",
+      *[](tomoto::ILDAModel& self) {
+        return (int)self.getTermWeight();
+      })
+    .define_method(
       "used_vocab_df",
       *[](tomoto::ILDAModel& self) {
         auto vocab = self.getVocabDf();

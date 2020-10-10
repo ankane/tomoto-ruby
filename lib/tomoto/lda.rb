@@ -45,6 +45,10 @@ module Tomoto
       _train(iterations, workers)
     end
 
+    def tw
+      TERM_WEIGHT[_tw]
+    end
+
     private
 
     def prepare
