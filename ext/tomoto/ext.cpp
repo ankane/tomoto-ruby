@@ -64,6 +64,18 @@ std::vector<float> from_ruby<std::vector<float>>(Object x)
   return res;
 }
 
+template<>
+std::vector<uint64_t> from_ruby<std::vector<uint64_t>>(Object x)
+{
+  Array a = Array(x);
+  std::vector<uint64_t> res;
+  res.reserve(a.size());
+  for (auto const& v : a) {
+    res.push_back(from_ruby<uint64_t>(v));
+  }
+  return res;
+}
+
 extern "C"
 void Init_ext()
 {
@@ -335,8 +347,8 @@ void Init_ext()
   Class rb_cGDMR = define_class_under<tomoto::IGDMRModel, tomoto::IDMRModel>(rb_mTomoto, "GDMR")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k) {
-        return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k);
+      *[](size_t tw, size_t k, std::vector<uint64_t> degrees) {
+        return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k, degrees);
       });
 
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")
