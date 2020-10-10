@@ -12,6 +12,7 @@
 #include <LDA.h>
 #include <LLDA.h>
 #include <PA.h>
+#include <PLDA.h>
 
 // rice
 #include <rice/Array.hpp>
@@ -374,5 +375,25 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::ILLDAModel::create((tomoto::TermWeight)tw, k, alpha, eta, seed);
+      })
+    .define_method(
+      "topics_per_label",
+      *[](tomoto::IPLDAModel& self) {
+        return self.getNumTopicsPerLabel();
+      });
+
+  Class rb_cPLDA = define_class_under<tomoto::IPLDAModel, tomoto::ILLDAModel>(rb_mTomoto, "PLDA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t latent_topics, float alpha, float eta, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IPLDAModel::create((tomoto::TermWeight)tw, latent_topics, 1, alpha, eta, seed);
+      })
+    .define_method(
+      "latent_topics",
+      *[](tomoto::IPLDAModel& self) {
+        return self.getNumLatentTopics();
       });
 }

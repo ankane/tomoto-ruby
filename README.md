@@ -68,6 +68,7 @@ Supports:
 
 - Latent Dirichlet Allocation (`LDA`)
 - Labeled LDA (`LLDA`) [in development]
+- Partially Labeled LDA (`PLDA`) [in development]
 - Dirichlet Multinomial Regression (`DMR`) [master]
 - Hierarchical Dirichlet Process (`HDP`)
 - Hierarchical LDA (`HLDA`) [master]
