@@ -12,6 +12,7 @@ class LDATest < Minitest::Test
     model.train(0)
     assert_equal 2, model.num_words
     assert_equal 2, model.num_vocabs
+    assert_equal 10, model.optim_interval
     assert_equal ["new", "document"], model.vocabs
 
     expected = {
