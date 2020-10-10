@@ -41,6 +41,16 @@ Object to_ruby<std::vector<float>>(std::vector<float> const & x)
 }
 
 template<>
+Object to_ruby<std::vector<uint32_t>>(std::vector<uint32_t> const & x)
+{
+  Array res;
+  for (auto const& v : x) {
+    res.push(v);
+  }
+  return res;
+}
+
+template<>
 Object to_ruby<std::vector<uint64_t>>(std::vector<uint64_t> const & x)
 {
   Array res;
@@ -434,6 +444,11 @@ void Init_ext()
       *[](tomoto::IDTModel& self, float value) {
         self.setShapeC(value);
         return value;
+      })
+    .define_method(
+      "num_docs_by_timepoint",
+      *[](tomoto::IDTModel& self) {
+        return self.getNumDocsByT();
       })
     .define_method(
       "num_timepoints",
