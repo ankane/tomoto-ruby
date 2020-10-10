@@ -11,5 +11,6 @@ class SLDATest < Minitest::Test
 
     model.train(0)
     assert_equal "l", model.var_type(0)
+    assert model.summary
   end
 end

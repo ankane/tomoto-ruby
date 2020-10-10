@@ -9,5 +9,6 @@ class PLDATest < Minitest::Test
     assert_equal 1, model.topics_per_label
 
     model.add_doc(["new", "document"], labels: ["spam"])
+    assert model.summary
   end
 end
