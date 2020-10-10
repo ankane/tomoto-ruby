@@ -9,6 +9,7 @@ require "tomoto/hdp"
 require "tomoto/hlda"
 require "tomoto/hpa"
 require "tomoto/lda"
+require "tomoto/llda"
 require "tomoto/version"
 
 module Tomoto

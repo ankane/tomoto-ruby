@@ -10,6 +10,7 @@
 #include <HLDA.h>
 #include <HPA.h>
 #include <LDA.h>
+#include <LLDA.h>
 #include <PA.h>
 
 // rice
@@ -363,5 +364,15 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IHPAModel::create((tomoto::TermWeight)tw, false, k1, k2, alpha, eta, seed);
+      });
+
+  Class rb_cLLDA = define_class_under<tomoto::ILLDAModel, tomoto::ILDAModel>(rb_mTomoto, "LLDA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k, float alpha, float eta, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::ILLDAModel::create((tomoto::TermWeight)tw, k, alpha, eta, seed);
       });
 }

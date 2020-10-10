@@ -67,6 +67,7 @@ model.ll_per_word
 Supports:
 
 - Latent Dirichlet Allocation (`LDA`)
+- Labeled LDA (`LLDA`) [in development]
 - Dirichlet Multinomial Regression (`DMR`) [master]
 - Hierarchical Dirichlet Process (`HDP`)
 - Hierarchical LDA (`HLDA`) [master]
