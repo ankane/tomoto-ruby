@@ -67,15 +67,15 @@ model.ll_per_word
 Supports:
 
 - Latent Dirichlet Allocation (`LDA`)
-- Labeled LDA (`LLDA`) - *in development*
-- Partially Labeled LDA (`PLDA`) - *in development*
-- Supervised LDA (`SLDA`) - *in development*
+- Labeled LDA (`LLDA`)
+- Partially Labeled LDA (`PLDA`)
+- Supervised LDA (`SLDA`)
 - Dirichlet Multinomial Regression (`DMR`)
-- Generalized Dirichlet Multinomial Regression (`GDMR`) - *in development*
+- Generalized Dirichlet Multinomial Regression (`GDMR`)
 - Hierarchical Dirichlet Process (`HDP`)
 - Hierarchical LDA (`HLDA`)
-- Multi Grain LDA (`MGLDA`) - *in development*
-- Pachinko Allocation (`PA`) - *in development*
+- Multi Grain LDA (`MGLDA`)
+- Pachinko Allocation (`PA`)
 - Hierarchical PA (`HPA`)
 - Correlated Topic Model (`CT`)
 - Dynamic Topic Model (`DT`)
