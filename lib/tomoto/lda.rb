@@ -50,11 +50,11 @@ module Tomoto
       #   summary << "|"
       # end
 
-      # if params
-      #   summary << "<Parameters>"
-      #   params_info(summary)
-      #   summary << "|"
-      # end
+      if params
+        summary << "<Parameters>"
+        params_info(summary)
+        summary << "|"
+      end
 
       if topic_word_top_n > 0
         summary << "<Topics>"
@@ -123,7 +123,10 @@ module Tomoto
     end
 
     def params_info(summary)
-      # TODO
+      summary << "| alpha (Dirichlet prior on the per-document topic distributions)"
+      summary << "|  #{alpha}"
+      summary << "| eta (Dirichlet prior on the per-topic word distribution)"
+      summary << "|  %.5f" % eta
     end
 
     def topics_info(summary, topic_word_top_n:)
