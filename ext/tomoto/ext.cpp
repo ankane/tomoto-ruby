@@ -41,6 +41,16 @@ Object to_ruby<std::vector<float>>(std::vector<float> const & x)
 }
 
 template<>
+Object to_ruby<std::vector<uint64_t>>(std::vector<uint64_t> const & x)
+{
+  Array res;
+  for (auto const& v : x) {
+    res.push(v);
+  }
+  return res;
+}
+
+template<>
 std::vector<std::string> from_ruby<std::vector<std::string>>(Object x)
 {
   Array a = Array(x);
@@ -439,6 +449,16 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k, degrees, alpha, sigma, sigma0, eta, alpha_epsilon, seed);
+      })
+    .define_method(
+      "degrees",
+      *[](tomoto::IGDMRModel& self) {
+        return self.getFs();
+      })
+    .define_method(
+      "sigma0",
+      *[](tomoto::IGDMRModel& self) {
+        return self.getSigma0();
       });
 
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")
