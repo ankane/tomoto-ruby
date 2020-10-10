@@ -1,6 +1,6 @@
 ## 0.1.1 (unreleased)
 
-- Added `DMR` and `DT` models
+- Added `DMR`, `DT`, and `HLDA` models
 
 ## 0.1.0 (2020-10-09)
 

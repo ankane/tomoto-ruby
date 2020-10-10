@@ -69,6 +69,7 @@ Supports:
 - Latent Dirichlet Allocation (`LDA`)
 - Dirichlet Multinomial Regression (`DMR`) [master]
 - Hierarchical Dirichlet Process (`HDP`)
+- Hierarchical LDA (`HLDA`) [master]
 - Correlated Topic Model (`CT`)
 - Dynamic Topic Model (`DT`) [master]
 

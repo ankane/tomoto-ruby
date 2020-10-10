@@ -7,6 +7,7 @@
 #include <DMR.h>
 #include <DT.h>
 #include <HDP.h>
+#include <HLDA.h>
 #include <LDA.h>
 
 // rice
@@ -323,5 +324,30 @@ void Init_ext()
       "num_tables",
       *[](tomoto::IHDPModel& self) {
         return self.getTotalTables();
+      });
+
+  Class rb_cHLDA = define_class_under<tomoto::IHLDAModel, tomoto::ILDAModel>(rb_mTomoto, "HLDA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t levelDepth, float alpha, float eta, float gamma, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, levelDepth, alpha, eta, gamma, seed);
+      })
+    .define_method(
+      "depth",
+      *[](tomoto::IHLDAModel& self) {
+        return self.getLevelDepth();
+      })
+    .define_method(
+      "gamma",
+      *[](tomoto::IHLDAModel& self) {
+        return self.getGamma();
+      })
+    .define_method(
+      "live_k",
+      *[](tomoto::IHLDAModel& self) {
+        return self.getLiveK();
       });
 }
