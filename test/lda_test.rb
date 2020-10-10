@@ -5,6 +5,8 @@ class LDATest < Minitest::Test
     model = Tomoto::LDA.new
     assert_in_delta 0.1, model.alpha
     assert_in_delta 0.01, model.eta
+    assert_equal 10, model.optim_interval
+    assert_in_delta 1, model.perplexity
 
     model.add_doc(["new", "document"])
     model.burn_in = 100
@@ -12,7 +14,6 @@ class LDATest < Minitest::Test
     model.train(0)
     assert_equal 2, model.num_words
     assert_equal 2, model.num_vocabs
-    assert_equal 10, model.optim_interval
     assert_equal ["new", "document"], model.vocabs
 
     expected = {

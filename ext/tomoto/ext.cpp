@@ -178,6 +178,11 @@ void Init_ext()
         return value;
       })
     .define_method(
+      "perplexity",
+      *[](tomoto::ILDAModel& self) {
+        return self.getPerplexity();
+      })
+    .define_method(
       "_prepare",
       *[](tomoto::ILDAModel& self, size_t minCnt, size_t minDf, size_t rmTop) {
         self.prepare(true, minCnt, minDf, rmTop);
