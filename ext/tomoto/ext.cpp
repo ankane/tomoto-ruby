@@ -6,11 +6,13 @@
 #include <CT.h>
 #include <DMR.h>
 #include <DT.h>
+#include <GDMR.h>
 #include <HDP.h>
 #include <HLDA.h>
 #include <HPA.h>
 #include <LDA.h>
 #include <LLDA.h>
+#include <MGLDA.h>
 #include <PA.h>
 #include <PLDA.h>
 #include <SLDA.h>
@@ -301,6 +303,13 @@ void Init_ext()
         return value;
       });
 
+  Class rb_cGDMR = define_class_under<tomoto::IGDMRModel, tomoto::IDMRModel>(rb_mTomoto, "GDMR")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k) {
+        return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k);
+      });
+
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")
     .define_singleton_method(
       "_new",
@@ -356,7 +365,15 @@ void Init_ext()
         return self.getLiveK();
       });
 
-  Class rb_cPA = define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(rb_mTomoto, "PA");
+  Class rb_cPA = define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(rb_mTomoto, "PA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k1, size_t k2, float alpha, float eta, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IPAModel::create((tomoto::TermWeight)tw, k1, k2, alpha, eta, seed);
+      });
 
   Class rb_cHPA = define_class_under<tomoto::IHPAModel, tomoto::IPAModel>(rb_mTomoto, "HPA")
     .define_singleton_method(
@@ -366,6 +383,13 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IHPAModel::create((tomoto::TermWeight)tw, false, k1, k2, alpha, eta, seed);
+      });
+
+  Class rb_cMGLDA = define_class_under<tomoto::IMGLDAModel, tomoto::ILDAModel>(rb_mTomoto, "MGLDA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k_g, size_t k_l, size_t t) {
+        return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, k_g, k_l, t);
       });
 
   Class rb_cLLDA = define_class_under<tomoto::ILLDAModel, tomoto::ILDAModel>(rb_mTomoto, "LLDA")
