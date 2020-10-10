@@ -157,14 +157,19 @@ void Init_ext()
         return self.getLLPerWord();
       })
     .define_method(
-      "num_words",
+      "num_docs",
       *[](tomoto::ILDAModel& self) {
-        return self.getN();
+        return self.getNumDocs();
       })
     .define_method(
       "num_vocabs",
       *[](tomoto::ILDAModel& self) {
         return self.getV();
+      })
+    .define_method(
+      "num_words",
+      *[](tomoto::ILDAModel& self) {
+        return self.getN();
       })
     .define_method(
       "optim_interval",
@@ -219,6 +224,17 @@ void Init_ext()
       *[](tomoto::ILDAModel& self, size_t iteration, size_t workers) {
         size_t ps = 0;
         self.train(iteration, workers, (tomoto::ParallelScheme)ps);
+      })
+    .define_method(
+      "used_vocabs",
+      *[](tomoto::ILDAModel& self) {
+        auto dict = self.getVocabDict();
+        Array res;
+        auto utf8 = Class(rb_cEncoding).call("const_get", "UTF_8");
+        for (size_t i = 0; i < self.getV(); i++) {
+          res.push(to_ruby<std::string>(dict.toWord(i)).call("force_encoding", utf8));
+        }
+        return res;
       })
     .define_method(
       "vocabs",
