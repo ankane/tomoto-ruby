@@ -80,20 +80,14 @@ Supports:
 - Correlated Topic Model (`CT`)
 - Dynamic Topic Model (`DT`)
 
-## Parameters
+## API
 
-```ruby
-Tomoto::LDA.new(
-  tw: :one, # or :idf, :pmi
-  min_cf: 0,
-  min_df: 0,
-  rm_top: 0,
-  k: 1,
-  alpha: 0.1,
-  eta: 0.01,
-  seed: nil
-)
-```
+This library follows the [tomotopy API](https://bab2min.github.io/tomotopy/v0.9.0/en/). There are a few changes to make it more Ruby-like:
+
+- The `get_` prefix has been removed from methods (`topic_words` instead of `get_topic_words`)
+- Methods that return booleans use `?` instead of `is_`  (`live_topic?` instead of `is_live_topic`)
+
+If a method or option you need isn’t supported, feel free to open an issue.
 
 ## Tokenization
 
