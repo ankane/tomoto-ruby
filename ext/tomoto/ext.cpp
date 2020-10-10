@@ -400,6 +400,16 @@ void Init_ext()
       "_new",
       *[](size_t tw, size_t k_g, size_t k_l, size_t t) {
         return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, k_g, k_l, t);
+      })
+    .define_method(
+      "_add_doc",
+      *[](tomoto::IMGLDAModel& self, Array rb_words, std::string delimiter) {
+        std::vector<std::string> words;
+        words.reserve(rb_words.size());
+        for (auto const& v : rb_words) {
+          words.push_back(from_ruby<std::string>(v));
+        }
+        self.addDoc(words, delimiter);
       });
 
   Class rb_cLLDA = define_class_under<tomoto::ILLDAModel, tomoto::ILDAModel>(rb_mTomoto, "LLDA")
