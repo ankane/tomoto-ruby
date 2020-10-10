@@ -494,13 +494,16 @@ void Init_ext()
   Class rb_cSLDA = define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(rb_mTomoto, "SLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, Array rb_vars) {
+      *[](size_t tw, size_t k, Array rb_vars, float alpha, float eta, std::vector<float> mu, std::vector<float> nu_sq, std::vector<float> glm_param, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
         std::vector<tomoto::ISLDAModel::GLM> vars;
         vars.reserve(rb_vars.size());
         for (auto const& v : rb_vars) {
           vars.push_back((tomoto::ISLDAModel::GLM) from_ruby<int>(v));
         }
-        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, k, vars);
+        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, k, vars, alpha, eta, mu, nu_sq, glm_param, seed);
       })
     .define_method(
       "_add_doc",
