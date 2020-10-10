@@ -31,7 +31,7 @@ using Rice::define_class_under;
 using Rice::define_module;
 
 template<>
-Object to_ruby<std::vector<float>>(std::vector<float> const & x)
+Object to_ruby<std::vector<tomoto::Float>>(std::vector<tomoto::Float> const & x)
 {
   Array res;
   for (auto const& v : x) {
@@ -73,13 +73,13 @@ std::vector<std::string> from_ruby<std::vector<std::string>>(Object x)
 }
 
 template<>
-std::vector<float> from_ruby<std::vector<float>>(Object x)
+std::vector<tomoto::Float> from_ruby<std::vector<tomoto::Float>>(Object x)
 {
   Array a = Array(x);
-  std::vector<float> res;
+  std::vector<tomoto::Float> res;
   res.reserve(a.size());
   for (auto const& v : a) {
-    res.push_back(from_ruby<float>(v));
+    res.push_back(from_ruby<tomoto::Float>(v));
   }
   return res;
 }
@@ -117,7 +117,7 @@ void Init_ext()
   Class rb_cLDA = define_class_under<tomoto::ILDAModel>(rb_mTomoto, "LDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, float alpha, float eta, int seed) {
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -321,7 +321,7 @@ void Init_ext()
   Class rb_cCT = define_class_under<tomoto::ICTModel, tomoto::ILDAModel>(rb_mTomoto, "CT")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, float alpha, float eta, int seed) {
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -368,7 +368,7 @@ void Init_ext()
   Class rb_cDMR = define_class_under<tomoto::IDMRModel, tomoto::ILDAModel>(rb_mTomoto, "DMR")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, float alpha, float sigma, float eta, float alpha_epsilon, int seed) {
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float eta, tomoto::Float alpha_epsilon, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -386,7 +386,7 @@ void Init_ext()
       })
     .define_method(
       "alpha_epsilon=",
-      *[](tomoto::IDMRModel& self, float value) {
+      *[](tomoto::IDMRModel& self, tomoto::Float value) {
         self.setAlphaEps(value);
         return value;
       })
@@ -420,7 +420,7 @@ void Init_ext()
   Class rb_cDT = define_class_under<tomoto::IDTModel, tomoto::ILDAModel>(rb_mTomoto, "DT")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, size_t t, float alphaVar, float etaVar, float phiVar, float shapeA, float shapeB, float shapeC) {
+      *[](size_t tw, size_t k, size_t t, tomoto::Float alphaVar, tomoto::Float etaVar, tomoto::Float phiVar, tomoto::Float shapeA, tomoto::Float shapeB, tomoto::Float shapeC) {
         // Rice only supports 10 arguments
         int seed = -1;
         if (seed < 0) {
@@ -440,7 +440,7 @@ void Init_ext()
       })
     .define_method(
       "lr_a=",
-      *[](tomoto::IDTModel& self, float value) {
+      *[](tomoto::IDTModel& self, tomoto::Float value) {
         self.setShapeA(value);
         return value;
       })
@@ -451,7 +451,7 @@ void Init_ext()
       })
     .define_method(
       "lr_b=",
-      *[](tomoto::IDTModel& self, float value) {
+      *[](tomoto::IDTModel& self, tomoto::Float value) {
         self.setShapeB(value);
         return value;
       })
@@ -462,7 +462,7 @@ void Init_ext()
       })
     .define_method(
       "lr_c=",
-      *[](tomoto::IDTModel& self, float value) {
+      *[](tomoto::IDTModel& self, tomoto::Float value) {
         self.setShapeC(value);
         return value;
       })
@@ -480,7 +480,7 @@ void Init_ext()
   Class rb_cGDMR = define_class_under<tomoto::IGDMRModel, tomoto::IDMRModel>(rb_mTomoto, "GDMR")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, std::vector<uint64_t> degrees, float alpha, float sigma, float sigma0, float eta, float alpha_epsilon, int seed) {
+      *[](size_t tw, size_t k, std::vector<uint64_t> degrees, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float sigma0, tomoto::Float eta, tomoto::Float alpha_epsilon, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -500,7 +500,7 @@ void Init_ext()
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, float alpha, float eta, float gamma, int seed) {
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, tomoto::Float gamma, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -530,7 +530,7 @@ void Init_ext()
   Class rb_cHLDA = define_class_under<tomoto::IHLDAModel, tomoto::ILDAModel>(rb_mTomoto, "HLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t levelDepth, float alpha, float eta, float gamma, int seed) {
+      *[](size_t tw, size_t levelDepth, tomoto::Float alpha, tomoto::Float eta, tomoto::Float gamma, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -580,7 +580,7 @@ void Init_ext()
   Class rb_cPA = define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(rb_mTomoto, "PA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k1, size_t k2, float alpha, float eta, int seed) {
+      *[](size_t tw, size_t k1, size_t k2, tomoto::Float alpha, tomoto::Float eta, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -600,7 +600,7 @@ void Init_ext()
   Class rb_cHPA = define_class_under<tomoto::IHPAModel, tomoto::IPAModel>(rb_mTomoto, "HPA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k1, size_t k2, float alpha, float eta, int seed) {
+      *[](size_t tw, size_t k1, size_t k2, tomoto::Float alpha, tomoto::Float eta, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -610,7 +610,7 @@ void Init_ext()
   Class rb_cMGLDA = define_class_under<tomoto::IMGLDAModel, tomoto::ILDAModel>(rb_mTomoto, "MGLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k_g, size_t k_l, size_t t, float alpha_g, float alpha_l, float alpha_mg, float alpha_ml, float eta_g) {
+      *[](size_t tw, size_t k_g, size_t k_l, size_t t, tomoto::Float alpha_g, tomoto::Float alpha_l, tomoto::Float alpha_mg, tomoto::Float alpha_ml, tomoto::Float eta_g) {
         return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, k_g, k_l, t, alpha_g, alpha_l, alpha_mg, alpha_ml, eta_g);
       })
     .define_method(
@@ -672,7 +672,7 @@ void Init_ext()
   Class rb_cLLDA = define_class_under<tomoto::ILLDAModel, tomoto::ILDAModel>(rb_mTomoto, "LLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, float alpha, float eta, int seed) {
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -692,7 +692,7 @@ void Init_ext()
   Class rb_cPLDA = define_class_under<tomoto::IPLDAModel, tomoto::ILLDAModel>(rb_mTomoto, "PLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t latent_topics, float alpha, float eta, int seed) {
+      *[](size_t tw, size_t latent_topics, tomoto::Float alpha, tomoto::Float eta, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -712,7 +712,7 @@ void Init_ext()
   Class rb_cSLDA = define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(rb_mTomoto, "SLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, Array rb_vars, float alpha, float eta, std::vector<float> mu, std::vector<float> nu_sq, std::vector<float> glm_param, int seed) {
+      *[](size_t tw, size_t k, Array rb_vars, tomoto::Float alpha, tomoto::Float eta, std::vector<tomoto::Float> mu, std::vector<tomoto::Float> nu_sq, std::vector<tomoto::Float> glm_param, int seed) {
         if (seed < 0) {
           seed = std::random_device{}();
         }
@@ -725,7 +725,7 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::ISLDAModel& self, std::vector<std::string> words, std::vector<float> y) {
+      *[](tomoto::ISLDAModel& self, std::vector<std::string> words, std::vector<tomoto::Float> y) {
         self.addDoc(words, y);
       })
     .define_method(
