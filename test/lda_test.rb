@@ -7,6 +7,7 @@ class LDATest < Minitest::Test
     assert_in_delta 0.01, model.eta
     assert_equal 10, model.optim_interval
     assert_in_delta 1, model.perplexity
+    assert_equal 0, model.global_step
 
     model.add_doc(["new", "document"])
     model.burn_in = 100

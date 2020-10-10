@@ -139,6 +139,11 @@ void Init_ext()
         return self.getEta();
       })
     .define_method(
+      "global_step",
+      *[](tomoto::ILDAModel& self) {
+        return self.getGlobalStep();
+      })
+    .define_method(
       "k",
       *[](tomoto::ILDAModel& self) {
         return self.getK();
