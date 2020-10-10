@@ -5,6 +5,14 @@ module Tomoto
       model.instance_variable_set(:@min_cf, min_cf)
       model.instance_variable_set(:@min_df, min_df)
       model.instance_variable_set(:@rm_top, rm_top)
+
+      init_params = {}
+      method(:new).parameters.each do |v|
+        next if v[0] != :key
+        init_params[v[1]] = binding.local_variable_get(v[1]).inspect
+      end
+      model.instance_variable_set(:@init_params, init_params)
+
       model
     end
 
@@ -44,11 +52,11 @@ module Tomoto
       training_info(summary)
       summary << "|"
 
-      # if initial_hp
-      #   summary << "<Initial Parameters>"
-      #   initial_params_info(summary)
-      #   summary << "|"
-      # end
+      if initial_hp
+        summary << "<Initial Parameters>"
+        initial_params_info(summary)
+        summary << "|"
+      end
 
       if params
         summary << "<Parameters>"
@@ -119,7 +127,13 @@ module Tomoto
     end
 
     def initial_params_info(summary)
-      # TODO
+      if @init_params
+        @init_params.each do |k, v|
+          summary << "| #{k}: #{v}"
+        end
+      else
+        summary << "| Not Available"
+      end
     end
 
     def params_info(summary)
