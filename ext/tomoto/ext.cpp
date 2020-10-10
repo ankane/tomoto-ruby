@@ -131,7 +131,11 @@ void Init_ext()
     .define_method(
       "alpha",
       *[](tomoto::ILDAModel& self) {
-        return self.getAlpha();
+        Array res;
+        for (size_t i = 0; i < self.getK(); i++) {
+          res.push(self.getAlpha(i));
+        }
+        return res;
       })
     .define_method(
       "burn_in",
@@ -507,6 +511,11 @@ void Init_ext()
         return tomoto::IHDPModel::create((tomoto::TermWeight)tw, k, alpha, eta, gamma, seed);
       })
     .define_method(
+      "alpha",
+      *[](tomoto::IHDPModel& self) {
+        return self.getAlpha();
+      })
+    .define_method(
       "gamma",
       *[](tomoto::IHDPModel& self) {
         return self.getGamma();
@@ -605,6 +614,16 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IHPAModel::create((tomoto::TermWeight)tw, false, k1, k2, alpha, eta, seed);
+      })
+    .define_method(
+      "alpha",
+      *[](tomoto::ILDAModel& self) {
+        Array res;
+        // use <= to return k+1 elements
+        for (size_t i = 0; i <= self.getK(); i++) {
+          res.push(self.getAlpha(i));
+        }
+        return res;
       });
 
   Class rb_cMGLDA = define_class_under<tomoto::IMGLDAModel, tomoto::ILDAModel>(rb_mTomoto, "MGLDA")

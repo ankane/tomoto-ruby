@@ -3,7 +3,7 @@ require_relative "test_helper"
 class LDATest < Minitest::Test
   def test_works
     model = Tomoto::LDA.new
-    assert_in_delta 0.1, model.alpha
+    assert_elements_in_delta [0.1], model.alpha
     assert_in_delta 0.01, model.eta
     assert_equal 0, model.global_step
     assert_equal 10, model.optim_interval

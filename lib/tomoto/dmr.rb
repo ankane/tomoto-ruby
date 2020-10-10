@@ -19,5 +19,9 @@ module Tomoto
         k.times.map { |i| _lambdas(i) }
       end
     end
+
+    def alpha
+      lambdas.map { |v| v.map { |v2| Math.exp(v2) } }
+    end
   end
 end
