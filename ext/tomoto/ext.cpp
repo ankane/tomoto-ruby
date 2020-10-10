@@ -307,7 +307,7 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::IDTModel& self, std::vector<std::string> words, int timepoint) {
+      *[](tomoto::IDTModel& self, std::vector<std::string> words, size_t timepoint) {
         self.addDoc(words, timepoint);
       })
     .define_method(
