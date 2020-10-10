@@ -347,8 +347,11 @@ void Init_ext()
   Class rb_cGDMR = define_class_under<tomoto::IGDMRModel, tomoto::IDMRModel>(rb_mTomoto, "GDMR")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, std::vector<uint64_t> degrees) {
-        return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k, degrees);
+      *[](size_t tw, size_t k, std::vector<uint64_t> degrees, float alpha, float sigma, float sigma0, float eta, float alpha_epsilon, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k, degrees, alpha, sigma, sigma0, eta, alpha_epsilon, seed);
       });
 
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")
