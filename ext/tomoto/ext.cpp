@@ -231,6 +231,16 @@ void Init_ext()
         self.train(iteration, workers, (tomoto::ParallelScheme)ps);
       })
     .define_method(
+      "used_vocab_freq",
+      *[](tomoto::ILDAModel& self) {
+        auto vocab = self.getVocabCf();
+        Array res;
+        for (size_t i = 0; i < self.getV(); i++) {
+          res.push(vocab[i]);
+        }
+        return res;
+      })
+    .define_method(
       "used_vocabs",
       *[](tomoto::ILDAModel& self) {
         auto dict = self.getVocabDict();
@@ -238,6 +248,16 @@ void Init_ext()
         auto utf8 = Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < self.getV(); i++) {
           res.push(to_ruby<std::string>(dict.toWord(i)).call("force_encoding", utf8));
+        }
+        return res;
+      })
+    .define_method(
+      "vocab_freq",
+      *[](tomoto::ILDAModel& self) {
+        auto vocab = self.getVocabCf();
+        Array res;
+        for (size_t i = 0; i < vocab.size(); i++) {
+          res.push(vocab[i]);
         }
         return res;
       })
