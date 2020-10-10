@@ -442,8 +442,8 @@ void Init_ext()
   Class rb_cMGLDA = define_class_under<tomoto::IMGLDAModel, tomoto::ILDAModel>(rb_mTomoto, "MGLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k_g, size_t k_l, size_t t) {
-        return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, k_g, k_l, t);
+      *[](size_t tw, size_t k_g, size_t k_l, size_t t, float alpha_g, float alpha_l, float alpha_mg, float alpha_ml, float eta_g) {
+        return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, k_g, k_l, t, alpha_g, alpha_l, alpha_mg, alpha_ml, eta_g);
       })
     .define_method(
       "_add_doc",
