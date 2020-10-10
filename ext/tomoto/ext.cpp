@@ -40,6 +40,30 @@ Object to_ruby<std::vector<float>>(std::vector<float> const & x)
   return res;
 }
 
+template<>
+std::vector<std::string> from_ruby<std::vector<std::string>>(Object x)
+{
+  Array a = Array(x);
+  std::vector<std::string> res;
+  res.reserve(a.size());
+  for (auto const& v : a) {
+    res.push_back(from_ruby<std::string>(v));
+  }
+  return res;
+}
+
+template<>
+std::vector<float> from_ruby<std::vector<float>>(Object x)
+{
+  Array a = Array(x);
+  std::vector<float> res;
+  res.reserve(a.size());
+  for (auto const& v : a) {
+    res.push_back(from_ruby<float>(v));
+  }
+  return res;
+}
+
 extern "C"
 void Init_ext()
 {
@@ -69,12 +93,7 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::ILDAModel& self, Array rb_words) {
-        std::vector<std::string> words;
-        words.reserve(rb_words.size());
-        for (auto const& v : rb_words) {
-          words.push_back(from_ruby<std::string>(v));
-        }
+      *[](tomoto::ILDAModel& self, std::vector<std::string> words) {
         self.addDoc(words);
       })
     .define_method(
@@ -403,12 +422,7 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::IMGLDAModel& self, Array rb_words, std::string delimiter) {
-        std::vector<std::string> words;
-        words.reserve(rb_words.size());
-        for (auto const& v : rb_words) {
-          words.push_back(from_ruby<std::string>(v));
-        }
+      *[](tomoto::IMGLDAModel& self, std::vector<std::string> words, std::string delimiter) {
         self.addDoc(words, delimiter);
       });
 
@@ -455,17 +469,7 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::ISLDAModel& self, Array rb_words, Array rb_y) {
-        std::vector<std::string> words;
-        words.reserve(rb_words.size());
-        for (auto const& v : rb_words) {
-          words.push_back(from_ruby<std::string>(v));
-        }
-        std::vector<float> y;
-        y.reserve(rb_y.size());
-        for (auto const& v : rb_y) {
-          y.push_back(from_ruby<float>(v));
-        }
+      *[](tomoto::ISLDAModel& self, std::vector<std::string> words, std::vector<float> y) {
         self.addDoc(words, y);
       });
 }
