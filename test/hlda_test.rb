@@ -4,6 +4,7 @@ class HLDATest < Minitest::Test
   def test_works
     model = Tomoto::HLDA.new
     assert_kind_of Tomoto::LDA, model
+    assert_elements_in_delta [0.1, 0.1], model.alpha
     model.train(0)
 
     assert_equal [], model.children_topics(0)
@@ -14,6 +15,6 @@ class HLDATest < Minitest::Test
     assert_equal 0, model.live_k
     assert_equal 0, model.num_docs_of_topic(0)
     assert_equal(-1, model.parent_topic(0))
-    # assert model.summary
+    assert model.summary
   end
 end

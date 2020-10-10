@@ -546,6 +546,15 @@ void Init_ext()
         return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, levelDepth, alpha, eta, gamma, seed);
       })
     .define_method(
+      "alpha",
+      *[](tomoto::IHLDAModel& self) {
+        Array res;
+        for (size_t i = 0; i < self.getLevelDepth(); i++) {
+          res.push(self.getAlpha(i));
+        }
+        return res;
+      })
+    .define_method(
       "_children_topics",
       *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
         return self.getChildTopicId(topic_id);
@@ -617,7 +626,7 @@ void Init_ext()
       })
     .define_method(
       "alpha",
-      *[](tomoto::ILDAModel& self) {
+      *[](tomoto::IHPAModel& self) {
         Array res;
         // use <= to return k+1 elements
         for (size_t i = 0; i <= self.getK(); i++) {
