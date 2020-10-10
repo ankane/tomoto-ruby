@@ -373,6 +373,16 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IPAModel::create((tomoto::TermWeight)tw, k1, k2, alpha, eta, seed);
+      })
+    .define_method(
+      "k1",
+      *[](tomoto::IPAModel& self) {
+        return self.getK();
+      })
+    .define_method(
+      "k2",
+      *[](tomoto::IPAModel& self) {
+        return self.getK2();
       });
 
   Class rb_cHPA = define_class_under<tomoto::IHPAModel, tomoto::IPAModel>(rb_mTomoto, "HPA")

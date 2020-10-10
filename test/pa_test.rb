@@ -5,5 +5,7 @@ class PATest < Minitest::Test
     model = Tomoto::PA.new
     assert_kind_of Tomoto::LDA, model
     assert_in_delta 0.1, model.alpha
+    assert_in_delta 1, model.k1
+    assert_in_delta 1, model.k2
   end
 end
