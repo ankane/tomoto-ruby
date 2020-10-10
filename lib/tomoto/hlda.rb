@@ -39,5 +39,18 @@ module Tomoto
       raise "topic_id must be < K" if topic_id >= k
       raise "train() should be called first" unless @prepared
     end
+
+    def topics_info(summary, topic_word_top_n:)
+      counts = count_by_topics
+
+      nested_info = lambda do |k = 0, level = 0|
+        words = topic_words(k, top_n: topic_word_top_n).keys.join(" ")
+        summary << "| #{"  " * level}##{k} (#{counts[k]}) : #{words}"
+        children_topics(k).sort.each do |c|
+          nested_info.call(c, level + 1)
+        end
+      end
+      nested_info.call
+    end
   end
 end
