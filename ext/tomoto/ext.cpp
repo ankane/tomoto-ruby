@@ -342,6 +342,11 @@ void Init_ext()
       *[](tomoto::IDTModel& self, float value) {
         self.setShapeC(value);
         return value;
+      })
+    .define_method(
+      "num_timepoints",
+      *[](tomoto::IDTModel& self) {
+        return self.getT();
       });
 
   Class rb_cGDMR = define_class_under<tomoto::IGDMRModel, tomoto::IDMRModel>(rb_mTomoto, "GDMR")
