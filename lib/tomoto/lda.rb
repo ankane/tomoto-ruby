@@ -15,9 +15,7 @@ module Tomoto
     end
 
     def add_doc(doc)
-      raise "cannot add_doc() after train()" if defined?(@prepared)
-      doc = doc.split(/[[:space:]]+/) unless doc.is_a?(Array)
-      _add_doc(doc)
+      _add_doc(prepare_doc(doc))
     end
 
     def count_by_topics
@@ -54,6 +52,12 @@ module Tomoto
         _prepare(@min_cf, @min_df, @rm_top)
         @prepared = true
       end
+    end
+
+    def prepare_doc(doc)
+      raise "cannot add_doc() after train()" if defined?(@prepared)
+      doc = doc.split(/[[:space:]]+/) unless doc.is_a?(Array)
+      doc
     end
 
     class << self

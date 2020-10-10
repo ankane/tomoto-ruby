@@ -435,7 +435,27 @@ void Init_ext()
   Class rb_cSLDA = define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(rb_mTomoto, "SLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k) {
-        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, k);
+      *[](size_t tw, size_t k, Array rb_vars) {
+        std::vector<tomoto::ISLDAModel::GLM> vars;
+        vars.reserve(rb_vars.size());
+        for (auto const& v : rb_vars) {
+          vars.push_back((tomoto::ISLDAModel::GLM) from_ruby<int>(v));
+        }
+        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, k, vars);
+      })
+    .define_method(
+      "_add_doc",
+      *[](tomoto::ISLDAModel& self, Array rb_words, Array rb_y) {
+        std::vector<std::string> words;
+        words.reserve(rb_words.size());
+        for (auto const& v : rb_words) {
+          words.push_back(from_ruby<std::string>(v));
+        }
+        std::vector<float> y;
+        y.reserve(rb_y.size());
+        for (auto const& v : rb_y) {
+          y.push_back(from_ruby<float>(v));
+        }
+        self.addDoc(words, y);
       });
 }
