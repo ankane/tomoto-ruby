@@ -5,7 +5,7 @@ module Tomoto
       model.instance_variable_set(:@min_cf, min_cf)
       model.instance_variable_set(:@min_df, min_df)
       model.instance_variable_set(:@rm_top, rm_top)
-      model
+      init_params(model, binding)
     end
 
     def add_doc(doc, labels: [])

@@ -5,15 +5,7 @@ module Tomoto
       model.instance_variable_set(:@min_cf, min_cf)
       model.instance_variable_set(:@min_df, min_df)
       model.instance_variable_set(:@rm_top, rm_top)
-
-      init_params = {}
-      method(:new).parameters.each do |v|
-        next if v[0] != :key
-        init_params[v[1]] = binding.local_variable_get(v[1]).inspect
-      end
-      model.instance_variable_set(:@init_params, init_params)
-
-      model
+      init_params(model, binding)
     end
 
     def self.load(filename)
@@ -155,6 +147,16 @@ module Tomoto
 
       def to_tw(tw)
         TERM_WEIGHT.index(tw) || (raise ArgumentError, "Invalid tw: #{tw}")
+      end
+
+      def init_params(model, binding)
+        init_params = {}
+        method(:new).parameters.each do |v|
+          next if v[0] != :key
+          init_params[v[1]] = binding.local_variable_get(v[1]).inspect
+        end
+        model.instance_variable_set(:@init_params, init_params)
+        model
       end
     end
   end
