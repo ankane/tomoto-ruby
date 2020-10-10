@@ -13,6 +13,7 @@ class LDATest < Minitest::Test
     model.add_doc(["new", "document"])
     model.burn_in = 100
     assert_equal 100, model.burn_in
+    assert model.summary
     model.train(0)
     assert_equal 2, model.num_words
     assert_equal 2, model.num_vocabs
@@ -23,7 +24,6 @@ class LDATest < Minitest::Test
       "document" => 0.5
     }
     assert_equal expected, model.topic_words(0)
-    assert model.summary
 
     model.save(tempfile)
     model = Tomoto::LDA.load(tempfile)
