@@ -127,7 +127,7 @@ module Tomoto
     end
 
     def initial_params_info(summary)
-      if @init_params
+      if defined?(@init_params)
         @init_params.each do |k, v|
           summary << "| #{k}: #{v}"
         end
