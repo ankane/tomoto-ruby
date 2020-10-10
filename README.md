@@ -70,6 +70,7 @@ Supports:
 - Dirichlet Multinomial Regression (`DMR`) [master]
 - Hierarchical Dirichlet Process (`HDP`)
 - Correlated Topic Model (`CT`)
+- Dynamic Topic Model (`DT`) [master]
 
 ## Parameters
 

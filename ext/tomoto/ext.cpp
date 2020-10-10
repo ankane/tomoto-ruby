@@ -5,6 +5,7 @@
 // tomoto
 #include <CT.h>
 #include <DMR.h>
+#include <DT.h>
 #include <HDP.h>
 #include <LDA.h>
 
@@ -192,9 +193,9 @@ void Init_ext()
       })
     .define_method(
       "num_beta_sample=",
-      *[](tomoto::ICTModel& self, size_t numSample) {
-        self.setNumBetaSample(numSample);
-        return numSample;
+      *[](tomoto::ICTModel& self, size_t value) {
+        self.setNumBetaSample(value);
+        return value;
       })
     .define_method(
       "num_tmn_sample",
@@ -203,9 +204,9 @@ void Init_ext()
       })
     .define_method(
       "num_tmn_sample=",
-      *[](tomoto::ICTModel& self, size_t numSample) {
-        self.setNumTMNSample(numSample);
-        return numSample;
+      *[](tomoto::ICTModel& self, size_t value) {
+        self.setNumTMNSample(value);
+        return value;
       })
     .define_method(
       "prior_cov",
@@ -234,9 +235,9 @@ void Init_ext()
       })
     .define_method(
       "alpha_epsilon=",
-      *[](tomoto::IDMRModel& self, float alphaEps) {
-        self.setAlphaEps(alphaEps);
-        return alphaEps;
+      *[](tomoto::IDMRModel& self, float value) {
+        self.setAlphaEps(value);
+        return value;
       })
     .define_method(
       "f",
@@ -247,6 +248,51 @@ void Init_ext()
       "sigma",
       *[](tomoto::IDMRModel& self) {
         return self.getSigma();
+      });
+
+  Class rb_cDT = define_class_under<tomoto::IDTModel, tomoto::ILDAModel>(rb_mTomoto, "DT")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k, size_t t, float alphaVar, float etaVar, float phiVar, float shapeA, float shapeB, float shapeC) {
+        // Rice only supports 10 arguments
+        int seed = -1;
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IDTModel::create((tomoto::TermWeight)tw, k, t, alphaVar, etaVar, phiVar, shapeA, shapeB, shapeC, 0, seed);
+      })
+    .define_method(
+      "lr_a",
+      *[](tomoto::IDTModel& self) {
+        return self.getShapeA();
+      })
+    .define_method(
+      "lr_a=",
+      *[](tomoto::IDTModel& self, float value) {
+        self.setShapeA(value);
+        return value;
+      })
+    .define_method(
+      "lr_b",
+      *[](tomoto::IDTModel& self) {
+        return self.getShapeB();
+      })
+    .define_method(
+      "lr_b=",
+      *[](tomoto::IDTModel& self, float value) {
+        self.setShapeB(value);
+        return value;
+      })
+    .define_method(
+      "lr_c",
+      *[](tomoto::IDTModel& self) {
+        return self.getShapeC();
+      })
+    .define_method(
+      "lr_c=",
+      *[](tomoto::IDTModel& self, float value) {
+        self.setShapeC(value);
+        return value;
       });
 
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")
