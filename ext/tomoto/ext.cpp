@@ -4,6 +4,7 @@
 
 // tomoto
 #include <CT.h>
+#include <DMR.h>
 #include <HDP.h>
 #include <LDA.h>
 
@@ -215,6 +216,37 @@ void Init_ext()
       "prior_mean",
       *[](tomoto::ICTModel& self) {
         return self.getPriorMean();
+      });
+
+  Class rb_cDMR = define_class_under<tomoto::IDMRModel, tomoto::ILDAModel>(rb_mTomoto, "DMR")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k, float alpha, float sigma, float eta, float alpha_epsilon, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IDMRModel::create((tomoto::TermWeight)tw, k, alpha, sigma, eta, alpha_epsilon, seed);
+      })
+    .define_method(
+      "alpha_epsilon",
+      *[](tomoto::IDMRModel& self) {
+        return self.getAlphaEps();
+      })
+    .define_method(
+      "alpha_epsilon=",
+      *[](tomoto::IDMRModel& self, float alphaEps) {
+        self.setAlphaEps(alphaEps);
+        return alphaEps;
+      })
+    .define_method(
+      "f",
+      *[](tomoto::IDMRModel& self) {
+        return self.getF();
+      })
+    .define_method(
+      "sigma",
+      *[](tomoto::IDMRModel& self) {
+        return self.getSigma();
       });
 
   Class rb_cHDP = define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(rb_mTomoto, "HDP")

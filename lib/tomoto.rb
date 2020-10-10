@@ -3,6 +3,7 @@ require "tomoto/ext"
 
 # modules
 require "tomoto/ct"
+require "tomoto/dmr"
 require "tomoto/hdp"
 require "tomoto/lda"
 require "tomoto/version"

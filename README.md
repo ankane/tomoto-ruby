@@ -67,6 +67,7 @@ model.ll_per_word
 Supports:
 
 - Latent Dirichlet Allocation (`LDA`)
+- Dirichlet Multinomial Regression (`DMR`) [master]
 - Hierarchical Dirichlet Process (`HDP`)
 - Correlated Topic Model (`CT`)
 
