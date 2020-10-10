@@ -6,5 +6,6 @@ class HPATest < Minitest::Test
     assert_kind_of Tomoto::PA, model
     assert_kind_of Tomoto::LDA, model
     assert_in_delta 0.1, model.alpha
+    assert model.summary
   end
 end

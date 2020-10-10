@@ -13,5 +13,6 @@ class GDMRTest < Minitest::Test
     assert_in_delta 3, model.sigma0
 
     model.add_doc(["new", "document"], metadata: [1.0])
+    assert model.summary
   end
 end

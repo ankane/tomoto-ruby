@@ -7,5 +7,6 @@ class PATest < Minitest::Test
     assert_in_delta 0.1, model.alpha
     assert_in_delta 1, model.k1
     assert_in_delta 1, model.k2
+    assert model.summary
   end
 end

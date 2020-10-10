@@ -9,6 +9,7 @@ class HDPTest < Minitest::Test
     assert_in_delta 0.1, model.gamma
     assert_equal 0, model.live_k
     assert_equal 0, model.num_tables
+    assert model.summary
   end
 
   def test_save_load

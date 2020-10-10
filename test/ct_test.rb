@@ -10,5 +10,6 @@ class CTTest < Minitest::Test
     assert_equal 5, model.num_tmn_sample
     assert_equal [[1.0, 0.0], [0.0, 1.0]], model.prior_cov
     assert_equal [0.0, 0.0], model.prior_mean
+    assert model.summary
   end
 end

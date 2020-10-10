@@ -16,5 +16,6 @@ class MGLDATest < Minitest::Test
     assert_equal 3, model.t
 
     model.add_doc(["new", "document"], delimiter: ".")
+    assert model.summary
   end
 end

@@ -7,5 +7,6 @@ class LLDATest < Minitest::Test
     assert_in_delta 0.1, model.alpha
 
     model.add_doc(["new", "document"], labels: ["spam"])
+    assert model.summary
   end
 end

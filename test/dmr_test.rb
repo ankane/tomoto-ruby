@@ -19,5 +19,7 @@ class DMRTest < Minitest::Test
     assert_in_delta(-2.3025851, model.lambdas[0][0])
     assert_in_delta(-2.3025851, model.lambdas[1][0])
     assert_equal ["hello"], model.metadata_dict
+
+    assert model.summary
   end
 end

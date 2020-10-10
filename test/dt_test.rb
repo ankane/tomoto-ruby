@@ -13,5 +13,6 @@ class DTTest < Minitest::Test
     assert_equal [], model.num_docs_by_timepoint
 
     model.add_doc(["new", "document"], timepoint: 0)
+    # assert model.summary
   end
 end
