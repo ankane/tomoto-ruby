@@ -33,14 +33,18 @@ module Tomoto
     end
 
     # returns string instead of printing
-    def summary(topic_word_top_n: 5)
+    def summary(initial_hp: true, params: true, topic_word_top_n: 5)
       summary = []
+
+      sum = used_vocab_freq.sum.to_f
+      mapped = used_vocab_freq.map { |v| v / sum }
+      entropy = mapped.map { |v| v * Math.log(v) }.sum
 
       summary << "<Basic Info>"
       summary << "| #{self.class.name.sub("Tomoto::", "")} (current version: #{VERSION})"
       summary << "| #{num_docs} docs, #{num_words} words"
       summary << "| Total Vocabs: #{vocabs.size}, Used Vocabs: #{used_vocabs.size}"
-      # summary << "| Entropy of words: #{}"
+      summary << "| Entropy of words: %.5f" % entropy
       summary << "| Removed Vocabs: #{removed_top_words.join(" ")}"
       summary << "|"
 
@@ -49,6 +53,18 @@ module Tomoto
       summary << "| Optimization Interval: #{optim_interval}"
       summary << "| Log-likelihood per word: %.5f" % ll_per_word
       summary << "|"
+
+      # if initial_hp
+      #   summary << "<Initial Parameters>"
+      #   summary << "| todo"
+      #   summary << "|"
+      # end
+
+      # if params
+      #   summary << "<Parameters>"
+      #   summary << "| todo"
+      #   summary << "|"
+      # end
 
       summary << "<Topics>"
       counts = count_by_topics
