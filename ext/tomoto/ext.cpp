@@ -396,6 +396,11 @@ void Init_ext()
         return self.getF();
       })
     .define_method(
+      "_lambdas",
+      *[](tomoto::IDMRModel& self, tomoto::Tid topic_id) {
+        return self.getLambdaByTopic(topic_id);
+      })
+    .define_method(
       "sigma",
       *[](tomoto::IDMRModel& self) {
         return self.getSigma();

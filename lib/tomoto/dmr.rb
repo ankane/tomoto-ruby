@@ -11,5 +11,13 @@ module Tomoto
     def add_doc(doc, metadata: "")
       _add_doc(prepare_doc(doc), [metadata])
     end
+
+    def lambdas
+      if f == 0
+        []
+      else
+        k.times.map { |i| _lambdas(i) }
+      end
+    end
   end
 end
