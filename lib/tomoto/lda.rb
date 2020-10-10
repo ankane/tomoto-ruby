@@ -66,12 +66,15 @@ module Tomoto
       #   summary << "|"
       # end
 
-      summary << "<Topics>"
-      counts = count_by_topics
-      topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
-        summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
+      if topic_word_top_n > 0
+        summary << "<Topics>"
+        counts = count_by_topics
+        topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
+          summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
+        end
+        # skip ending |
       end
-      # skip ending |
+
       summary.join("\n")
     end
 
