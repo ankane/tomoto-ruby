@@ -1,4 +1,4 @@
-## 0.1.1 (unreleased)
+## 0.1.1 (2020-10-10)
 
 - Added many more models
 
