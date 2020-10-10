@@ -7,5 +7,27 @@ module Tomoto
       model.instance_variable_set(:@rm_top, rm_top)
       model
     end
+
+    def children_topics(topic_id)
+      check_topic(topic_id)
+      _children_topics(topic_id)
+    end
+
+    def level(topic_id)
+      check_topic(topic_id)
+      _level(topic_id)
+    end
+
+    def live_topic?(topic_id)
+      check_topic(topic_id)
+      _live_topic?(topic_id)
+    end
+
+    private
+
+    def check_topic(topic_id)
+      raise "topic_id must be < K" if topic_id >= k
+      raise "train() should be called first" unless @prepared
+    end
   end
 end

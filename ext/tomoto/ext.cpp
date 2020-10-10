@@ -516,6 +516,11 @@ void Init_ext()
         return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, levelDepth, alpha, eta, gamma, seed);
       })
     .define_method(
+      "_children_topics",
+      *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
+        return self.getChildTopicId(topic_id);
+      })
+    .define_method(
       "depth",
       *[](tomoto::IHLDAModel& self) {
         return self.getLevelDepth();
@@ -526,9 +531,19 @@ void Init_ext()
         return self.getGamma();
       })
     .define_method(
+      "_level",
+      *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
+        return self.getLevelOfTopic(topic_id);
+      })
+    .define_method(
       "live_k",
       *[](tomoto::IHLDAModel& self) {
         return self.getLiveK();
+      })
+    .define_method(
+      "_live_topic?",
+      *[](tomoto::IHLDAModel& self, tomoto::Tid topic_id) {
+        return self.isLiveTopic(topic_id);
       });
 
   Class rb_cPA = define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(rb_mTomoto, "PA")
