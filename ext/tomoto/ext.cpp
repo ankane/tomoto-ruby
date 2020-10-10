@@ -711,5 +711,11 @@ void Init_ext()
       "f",
       *[](tomoto::ISLDAModel& self) {
         return self.getF();
+      })
+    .define_method(
+      "var_type",
+      *[](tomoto::ISLDAModel& self, size_t var_id) {
+        if (var_id >= self.getF()) throw std::runtime_error{ "'var_id' must be < 'f'" };
+        return self.getTypeOfVar(var_id) == tomoto::ISLDAModel::GLM::linear ? "l" : "b";
       });
 }

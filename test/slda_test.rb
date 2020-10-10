@@ -8,5 +8,8 @@ class SLDATest < Minitest::Test
     assert_equal 1, model.f
 
     model.add_doc(["new", "document"], y: [1.0])
+
+    model.train(0)
+    assert_equal "l", model.var_type(0)
   end
 end

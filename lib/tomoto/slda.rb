@@ -12,6 +12,11 @@ module Tomoto
       _add_doc(prepare_doc(doc), y)
     end
 
+    def var_type(var_id)
+      raise "train() should be called first" unless @prepared
+      _var_type(var_id)
+    end
+
     private
 
     class << self
