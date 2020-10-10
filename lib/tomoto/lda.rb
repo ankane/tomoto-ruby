@@ -109,7 +109,7 @@ module Tomoto
       summary << "| #{num_docs} docs, #{num_words} words"
       summary << "| Total Vocabs: #{vocabs.size}, Used Vocabs: #{used_vocabs.size}"
       summary << "| Entropy of words: %.5f" % entropy
-      summary << "| Removed Vocabs: #{removed_top_words.join(" ")}"
+      summary << "| Removed Vocabs: #{removed_top_words.any? ? removed_top_words.join(" ") : "<NA>"}"
     end
 
     def training_info(summary)
