@@ -454,6 +454,11 @@ void Init_ext()
       "latent_topics",
       *[](tomoto::IPLDAModel& self) {
         return self.getNumLatentTopics();
+      })
+    .define_method(
+      "_add_doc",
+      *[](tomoto::IPLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
+        self.addDoc(words, labels);
       });
 
   Class rb_cSLDA = define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(rb_mTomoto, "SLDA")

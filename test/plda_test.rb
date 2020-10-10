@@ -8,5 +8,7 @@ class PLDATest < Minitest::Test
     assert_in_delta 0.1, model.alpha
     assert_equal 1, model.latent_topics
     assert_equal 1, model.topics_per_label
+
+    model.add_doc(["new", "document"], labels: ["spam"])
   end
 end
