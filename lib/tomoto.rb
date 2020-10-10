@@ -11,6 +11,7 @@ require "tomoto/hpa"
 require "tomoto/lda"
 require "tomoto/llda"
 require "tomoto/plda"
+require "tomoto/slda"
 require "tomoto/version"
 
 module Tomoto

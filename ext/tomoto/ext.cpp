@@ -13,6 +13,7 @@
 #include <LLDA.h>
 #include <PA.h>
 #include <PLDA.h>
+#include <SLDA.h>
 
 // rice
 #include <rice/Array.hpp>
@@ -395,5 +396,12 @@ void Init_ext()
       "latent_topics",
       *[](tomoto::IPLDAModel& self) {
         return self.getNumLatentTopics();
+      });
+
+  Class rb_cSLDA = define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(rb_mTomoto, "SLDA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k) {
+        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, k);
       });
 }
