@@ -55,6 +55,6 @@ class LDATest < Minitest::Test
     error = assert_raises(RuntimeError) do
       Tomoto::LDA.load(tempfile)
     end
-    assert_equal "matrix cols != 1': unspecified iostream_category error", error.message
+    assert_match "matrix cols != 1", error.message
   end
 end

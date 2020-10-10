@@ -11,6 +11,9 @@ apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 if apple_clang
   # silence rice warnings
   $CXXFLAGS += " -Wno-deprecated-declarations"
+else
+  # silence eigen warnings
+  $CXXFLAGS += " -Wno-ignored-attributes -Wno-deprecated-copy"
 end
 
 # silence tomoto warnings

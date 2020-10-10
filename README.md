@@ -2,6 +2,8 @@
 
 [tomoto](https://github.com/bab2min/tomotopy) - high performance topic modeling - for Ruby
 
+[![Build Status](https://travis-ci.org/ankane/tomoto.svg?branch=master)](https://travis-ci.org/ankane/tomoto)
+
 ## Installation
 
 Add this line to your application’s Gemfile:
