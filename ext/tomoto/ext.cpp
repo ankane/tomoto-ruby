@@ -564,5 +564,10 @@ void Init_ext()
       "_add_doc",
       *[](tomoto::ISLDAModel& self, std::vector<std::string> words, std::vector<float> y) {
         self.addDoc(words, y);
+      })
+    .define_method(
+      "f",
+      *[](tomoto::ISLDAModel& self) {
+        return self.getF();
       });
 }
