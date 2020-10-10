@@ -7,6 +7,7 @@ require "tomoto/dmr"
 require "tomoto/dt"
 require "tomoto/hdp"
 require "tomoto/hlda"
+require "tomoto/hpa"
 require "tomoto/lda"
 require "tomoto/version"
 

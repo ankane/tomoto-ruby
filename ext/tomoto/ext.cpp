@@ -8,7 +8,9 @@
 #include <DT.h>
 #include <HDP.h>
 #include <HLDA.h>
+#include <HPA.h>
 #include <LDA.h>
+#include <PA.h>
 
 // rice
 #include <rice/Array.hpp>
@@ -349,5 +351,17 @@ void Init_ext()
       "live_k",
       *[](tomoto::IHLDAModel& self) {
         return self.getLiveK();
+      });
+
+  Class rb_cPA = define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(rb_mTomoto, "PA");
+
+  Class rb_cHPA = define_class_under<tomoto::IHPAModel, tomoto::IPAModel>(rb_mTomoto, "HPA")
+    .define_singleton_method(
+      "_new",
+      *[](size_t tw, size_t k1, size_t k2, float alpha, float eta, int seed) {
+        if (seed < 0) {
+          seed = std::random_device{}();
+        }
+        return tomoto::IHPAModel::create((tomoto::TermWeight)tw, false, k1, k2, alpha, eta, seed);
       });
 }
