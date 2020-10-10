@@ -118,6 +118,14 @@ module Tomoto
       summary << "| Log-likelihood per word: %.5f" % ll_per_word
     end
 
+    def initial_params_info(summary)
+      # TODO
+    end
+
+    def params_info(summary)
+      # TODO
+    end
+
     def topics_info(summary, topic_word_top_n:)
       counts = count_by_topics
       topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
