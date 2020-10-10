@@ -26,6 +26,12 @@ model.add_doc("text from document three")
 model.train(100)
 ```
 
+Get the summary [master]
+
+```ruby
+model.summary
+```
+
 Get topic words
 
 ```ruby
