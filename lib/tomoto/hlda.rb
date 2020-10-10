@@ -15,7 +15,7 @@ module Tomoto
 
     def level(topic_id)
       check_topic(topic_id)
-      _level(topic_id)
+      _live_topic?(topic_id) ? _level(topic_id) : -1
     end
 
     def live_topic?(topic_id)
