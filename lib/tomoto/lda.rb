@@ -32,6 +32,33 @@ module Tomoto
       _save(filename, full)
     end
 
+    # returns string instead of printing
+    def summary(topic_word_top_n: 5)
+      summary = []
+
+      summary << "<Basic Info>"
+      summary << "| #{self.class.name.sub("Tomoto::", "")} (current version: #{VERSION})"
+      summary << "| #{num_docs} docs, #{num_words} words"
+      summary << "| Total Vocabs: #{vocabs.size}, Used Vocabs: #{used_vocabs.size}"
+      # summary << "| Entropy of words: #{}"
+      summary << "| Removed Vocabs: #{removed_top_words.join(" ")}"
+      summary << "|"
+
+      summary << "<Training Info>"
+      summary << "| Iterations: #{global_step}, Burn-in steps: #{burn_in}"
+      summary << "| Optimization Interval: #{optim_interval}"
+      summary << "| Log-likelihood per word: %.5f" % ll_per_word
+      summary << "|"
+
+      summary << "<Topics>"
+      counts = count_by_topics
+      topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
+        summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
+      end
+      # skip ending |
+      summary.join("\n")
+    end
+
     def topic_words(topic_id = nil, top_n: 10)
       if topic_id
         _topic_words(topic_id, top_n)

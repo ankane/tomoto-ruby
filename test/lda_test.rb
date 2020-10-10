@@ -23,10 +23,12 @@ class LDATest < Minitest::Test
       "document" => 0.5
     }
     assert_equal expected, model.topic_words(0)
+    assert model.summary
 
     model.save(tempfile)
     model = Tomoto::LDA.load(tempfile)
     assert_equal 2, model.num_vocabs
+    assert model.summary
   end
 
   def test_tw_invalid
