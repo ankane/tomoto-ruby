@@ -36,42 +36,29 @@ module Tomoto
     def summary(initial_hp: true, params: true, topic_word_top_n: 5)
       summary = []
 
-      sum = used_vocab_freq.sum.to_f
-      mapped = used_vocab_freq.map { |v| v / sum }
-      entropy = mapped.map { |v| v * Math.log(v) }.sum
-
       summary << "<Basic Info>"
-      summary << "| #{self.class.name.sub("Tomoto::", "")} (current version: #{VERSION})"
-      summary << "| #{num_docs} docs, #{num_words} words"
-      summary << "| Total Vocabs: #{vocabs.size}, Used Vocabs: #{used_vocabs.size}"
-      summary << "| Entropy of words: %.5f" % entropy
-      summary << "| Removed Vocabs: #{removed_top_words.join(" ")}"
+      basic_info(summary)
       summary << "|"
 
       summary << "<Training Info>"
-      summary << "| Iterations: #{global_step}, Burn-in steps: #{burn_in}"
-      summary << "| Optimization Interval: #{optim_interval}"
-      summary << "| Log-likelihood per word: %.5f" % ll_per_word
+      training_info(summary)
       summary << "|"
 
       # if initial_hp
       #   summary << "<Initial Parameters>"
-      #   summary << "| todo"
+      #   initial_params_info(summary)
       #   summary << "|"
       # end
 
       # if params
       #   summary << "<Parameters>"
-      #   summary << "| todo"
+      #   params_info(summary)
       #   summary << "|"
       # end
 
       if topic_word_top_n > 0
         summary << "<Topics>"
-        counts = count_by_topics
-        topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
-          summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
-        end
+        topics_info(summary, topic_word_top_n: topic_word_top_n)
         summary << "|"
       end
 
@@ -111,6 +98,31 @@ module Tomoto
       raise "cannot add_doc() after train()" if defined?(@prepared)
       doc = doc.split(/[[:space:]]+/) unless doc.is_a?(Array)
       doc
+    end
+
+    def basic_info(summary)
+      sum = used_vocab_freq.sum.to_f
+      mapped = used_vocab_freq.map { |v| v / sum }
+      entropy = mapped.map { |v| v * Math.log(v) }.sum
+
+      summary << "| #{self.class.name.sub("Tomoto::", "")} (current version: #{VERSION})"
+      summary << "| #{num_docs} docs, #{num_words} words"
+      summary << "| Total Vocabs: #{vocabs.size}, Used Vocabs: #{used_vocabs.size}"
+      summary << "| Entropy of words: %.5f" % entropy
+      summary << "| Removed Vocabs: #{removed_top_words.join(" ")}"
+    end
+
+    def training_info(summary)
+      summary << "| Iterations: #{global_step}, Burn-in steps: #{burn_in}"
+      summary << "| Optimization Interval: #{optim_interval}"
+      summary << "| Log-likelihood per word: %.5f" % ll_per_word
+    end
+
+    def topics_info(summary, topic_word_top_n:)
+      counts = count_by_topics
+      topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
+        summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
+      end
     end
 
     class << self
