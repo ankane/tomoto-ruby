@@ -5,5 +5,7 @@ class GDMRTest < Minitest::Test
     model = Tomoto::GDMR.new
     assert_kind_of Tomoto::DMR, model
     assert_kind_of Tomoto::LDA, model
+
+    # model.add_doc(["new", "document"], metadata: [1.0])
   end
 end

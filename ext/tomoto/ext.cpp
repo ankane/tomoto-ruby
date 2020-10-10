@@ -256,6 +256,11 @@ void Init_ext()
         return tomoto::IDMRModel::create((tomoto::TermWeight)tw, k, alpha, sigma, eta, alpha_epsilon, seed);
       })
     .define_method(
+      "_add_doc",
+      *[](tomoto::IDMRModel& self, std::vector<std::string> words, std::vector<std::string> metadata) {
+        self.addDoc(words, metadata);
+      })
+    .define_method(
       "alpha_epsilon",
       *[](tomoto::IDMRModel& self) {
         return self.getAlphaEps();
@@ -287,6 +292,11 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IDTModel::create((tomoto::TermWeight)tw, k, t, alphaVar, etaVar, phiVar, shapeA, shapeB, shapeC, 0, seed);
+      })
+    .define_method(
+      "_add_doc",
+      *[](tomoto::IDTModel& self, std::vector<std::string> words, int timepoint) {
+        self.addDoc(words, timepoint);
       })
     .define_method(
       "lr_a",
@@ -436,8 +446,13 @@ void Init_ext()
         return tomoto::ILLDAModel::create((tomoto::TermWeight)tw, k, alpha, eta, seed);
       })
     .define_method(
+      "_add_doc",
+      *[](tomoto::ILLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
+        self.addDoc(words, labels);
+      })
+    .define_method(
       "topics_per_label",
-      *[](tomoto::IPLDAModel& self) {
+      *[](tomoto::ILLDAModel& self) {
         return self.getNumTopicsPerLabel();
       });
 
@@ -451,14 +466,14 @@ void Init_ext()
         return tomoto::IPLDAModel::create((tomoto::TermWeight)tw, latent_topics, 1, alpha, eta, seed);
       })
     .define_method(
-      "latent_topics",
-      *[](tomoto::IPLDAModel& self) {
-        return self.getNumLatentTopics();
-      })
-    .define_method(
       "_add_doc",
       *[](tomoto::IPLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
         self.addDoc(words, labels);
+      })
+    .define_method(
+      "latent_topics",
+      *[](tomoto::IPLDAModel& self) {
+        return self.getNumLatentTopics();
       });
 
   Class rb_cSLDA = define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(rb_mTomoto, "SLDA")

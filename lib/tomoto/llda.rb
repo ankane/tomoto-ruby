@@ -7,5 +7,9 @@ module Tomoto
       model.instance_variable_set(:@rm_top, rm_top)
       model
     end
+
+    def add_doc(doc, labels: [])
+      _add_doc(prepare_doc(doc), labels)
+    end
   end
 end
