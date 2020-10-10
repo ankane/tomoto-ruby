@@ -401,6 +401,17 @@ void Init_ext()
         return self.getLambdaByTopic(topic_id);
       })
     .define_method(
+      "metadata_dict",
+      *[](tomoto::IDMRModel& self) {
+        auto dict = self.getMetadataDict();
+        Array res;
+        auto utf8 = Class(rb_cEncoding).call("const_get", "UTF_8");
+        for (size_t i = 0; i < dict.size(); i++) {
+          res.push(to_ruby<std::string>(dict.toWord(i)).call("force_encoding", utf8));
+        }
+        return res;
+      })
+    .define_method(
       "sigma",
       *[](tomoto::IDMRModel& self) {
         return self.getSigma();
