@@ -95,6 +95,11 @@ This library follows the [tomotopy API](https://bab2min.github.io/tomotopy/v0.9.
 
 If a method or option you need isn’t supported, feel free to open an issue.
 
+## Examples
+
+- [LDA](examples/lda_basic.rb)
+- [HDP](examples/hdp.rb)
+
 ## Tokenization
 
 Documents are tokenized by whitespace by default, or you can perform your own tokenization.
