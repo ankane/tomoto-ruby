@@ -18,5 +18,6 @@ require "tomoto/slda"
 require "tomoto/version"
 
 module Tomoto
+  PARALLEL_SCHEME = [:default, :none, :copy_merge, :partition]
   TERM_WEIGHT = [:one, :idf, :pmi]
 end

@@ -250,8 +250,7 @@ void Init_ext()
       })
     .define_method(
       "_train",
-      *[](tomoto::ILDAModel& self, size_t iteration, size_t workers) {
-        size_t ps = 0;
+      *[](tomoto::ILDAModel& self, size_t iteration, size_t workers, size_t ps) {
         self.train(iteration, workers, (tomoto::ParallelScheme)ps);
       })
     .define_method(

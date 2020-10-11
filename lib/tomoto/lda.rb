@@ -76,9 +76,9 @@ module Tomoto
       end
     end
 
-    def train(iterations = 10, workers: 0)
+    def train(iterations = 10, workers: 0, parallel: :default)
       prepare
-      _train(iterations, workers)
+      _train(iterations, workers, to_ps(parallel))
     end
 
     def tw
@@ -140,6 +140,10 @@ module Tomoto
       topic_words(top_n: topic_word_top_n).each_with_index do |words, i|
         summary << "| ##{i} (#{counts[i]}) : #{words.keys.join(" ")}"
       end
+    end
+
+    def to_ps(ps)
+      PARALLEL_SCHEME.index(ps) || (raise ArgumentError, "Invalid parallel scheme: #{ps}")
     end
 
     class << self
