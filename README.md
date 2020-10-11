@@ -105,7 +105,7 @@ model.add_doc(["tokens", "from", "document", "one"])
 
 ## Performance
 
-tomoto uses AVX2, AVX, or SSE2 instructions to increase performance on machines that support it. Check what it’s using with:
+tomoto uses AVX2, AVX, or SSE2 instructions to increase performance on machines that support it. Check which instruction set architecture it’s using with:
 
 ```ruby
 Tomoto.isa
