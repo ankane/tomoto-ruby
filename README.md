@@ -111,6 +111,16 @@ tomoto uses AVX2, AVX, or SSE2 instructions to increase performance on machines 
 Tomoto.isa
 ```
 
+## Parallelism [master]
+
+Choose a [parallelism algorithm](https://bab2min.github.io/tomotopy/v0.9.0/en/#parallel-sampling-algorithms) with:
+
+```ruby
+model.train(parallel: :partition)
+```
+
+Supported values are `:default`, `:none`, `:copy_merge`, and `:partition`.
+
 ## History
 
 View the [changelog](https://github.com/ankane/tomoto/blob/master/CHANGELOG.md)
