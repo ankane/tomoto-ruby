@@ -98,7 +98,7 @@ If a method or option you need isn’t supported, feel free to open an issue.
 ## Examples
 
 - [LDA](examples/lda_basic.rb)
-- [HDP](examples/hdp.rb)
+- [HDP](examples/hdp_basic.rb)
 
 ## Tokenization
 
