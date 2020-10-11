@@ -1,4 +1,4 @@
-## 0.1.2 (unreleased)
+## 0.1.2 (2020-10-10)
 
 - Added `summary` method
 - Added `parallel` option to `train` method

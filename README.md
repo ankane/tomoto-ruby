@@ -26,7 +26,7 @@ model.add_doc("text from document three")
 model.train(100) # iterations
 ```
 
-Get the summary [master]
+Get the summary
 
 ```ruby
 model.summary
@@ -116,7 +116,7 @@ tomoto uses AVX2, AVX, or SSE2 instructions to increase performance on machines 
 Tomoto.isa
 ```
 
-## Parallelism [master]
+## Parallelism
 
 Choose a [parallelism algorithm](https://bab2min.github.io/tomotopy/v0.9.0/en/#parallel-sampling-algorithms) with:
 
