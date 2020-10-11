@@ -23,7 +23,7 @@ model = Tomoto::LDA.new(k: 3)
 model.add_doc("text from document one")
 model.add_doc("text from document two")
 model.add_doc("text from document three")
-model.train(100)
+model.train(100) # iterations
 ```
 
 Get the summary [master]
