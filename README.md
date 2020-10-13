@@ -19,7 +19,7 @@ It can take 10-20 minutes to compile the extension.
 Train a model
 
 ```ruby
-model = Tomoto::LDA.new(k: 3)
+model = Tomoto::LDA.new(k: 2)
 model.add_doc("text from document one")
 model.add_doc("text from document two")
 model.add_doc("text from document three")
