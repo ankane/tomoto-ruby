@@ -7,3 +7,6 @@
 [submodule "vendor/tomotopy"]
 	path = vendor/tomotopy
 	url = https://github.com/bab2min/tomotopy.git
+[submodule "vendor/variant"]
+	path = vendor/variant
+	url = https://github.com/mapbox/variant.git

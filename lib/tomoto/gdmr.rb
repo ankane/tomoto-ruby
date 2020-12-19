@@ -9,7 +9,7 @@ module Tomoto
     end
 
     def add_doc(doc, metadata: [])
-      _add_doc(prepare_doc(doc), metadata.map(&:to_s))
+      _add_doc(prepare_doc(doc), metadata)
     end
   end
 end

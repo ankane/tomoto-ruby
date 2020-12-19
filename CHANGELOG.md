@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Updated tomoto to 0.10.0
+
 ## 0.1.2 (2020-10-10)
 
 - Added `summary` method

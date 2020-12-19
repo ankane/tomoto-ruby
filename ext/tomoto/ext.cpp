@@ -96,6 +96,12 @@ std::vector<uint64_t> from_ruby<std::vector<uint64_t>>(Object x)
   return res;
 }
 
+tomoto::RawDoc buildDoc(std::vector<std::string>& words) {
+  tomoto::RawDoc doc;
+  doc.rawWords = words;
+  return doc;
+}
+
 extern "C"
 void Init_ext()
 {
@@ -126,7 +132,7 @@ void Init_ext()
     .define_method(
       "_add_doc",
       *[](tomoto::ILDAModel& self, std::vector<std::string> words) {
-        self.addDoc(words);
+        self.addDoc(buildDoc(words));
       })
     .define_method(
       "alpha",
@@ -379,8 +385,10 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::IDMRModel& self, std::vector<std::string> words, std::vector<std::string> metadata) {
-        self.addDoc(words, metadata);
+      *[](tomoto::IDMRModel& self, std::vector<std::string> words, std::string metadata) {
+        auto doc = buildDoc(words);
+        doc.misc["metadata"] = metadata;
+        self.addDoc(doc);
       })
     .define_method(
       "alpha_epsilon",
@@ -433,8 +441,10 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::IDTModel& self, std::vector<std::string> words, size_t timepoint) {
-        self.addDoc(words, timepoint);
+      *[](tomoto::IDTModel& self, std::vector<std::string> words, uint32_t timepoint) {
+        auto doc = buildDoc(words);
+        doc.misc["timepoint"] = timepoint;
+        self.addDoc(doc);
       })
     .define_method(
       "lr_a",
@@ -488,6 +498,13 @@ void Init_ext()
           seed = std::random_device{}();
         }
         return tomoto::IGDMRModel::create((tomoto::TermWeight)tw, k, degrees, alpha, sigma, sigma0, eta, alpha_epsilon, seed);
+      })
+    .define_method(
+      "_add_doc",
+      *[](tomoto::IDMRModel& self, std::vector<std::string> words, std::vector<tomoto::Float> metadata) {
+        auto doc = buildDoc(words);
+        doc.misc["metadata"] = metadata;
+        self.addDoc(doc);
       })
     .define_method(
       "degrees",
@@ -643,7 +660,9 @@ void Init_ext()
     .define_method(
       "_add_doc",
       *[](tomoto::IMGLDAModel& self, std::vector<std::string> words, std::string delimiter) {
-        self.addDoc(words, delimiter);
+        auto doc = buildDoc(words);
+        doc.misc["delimiter"] = delimiter;
+        self.addDoc(doc);
       })
     .define_method(
       "alpha_g",
@@ -708,7 +727,9 @@ void Init_ext()
     .define_method(
       "_add_doc",
       *[](tomoto::ILLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
-        self.addDoc(words, labels);
+        auto doc = buildDoc(words);
+        doc.misc["labels"] = labels;
+        self.addDoc(doc);
       })
     .define_method(
       "topics_per_label",
@@ -728,7 +749,9 @@ void Init_ext()
     .define_method(
       "_add_doc",
       *[](tomoto::IPLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
-        self.addDoc(words, labels);
+        auto doc = buildDoc(words);
+        doc.misc["labels"] = labels;
+        self.addDoc(doc);
       })
     .define_method(
       "latent_topics",
@@ -753,7 +776,9 @@ void Init_ext()
     .define_method(
       "_add_doc",
       *[](tomoto::ISLDAModel& self, std::vector<std::string> words, std::vector<tomoto::Float> y) {
-        self.addDoc(words, y);
+        auto doc = buildDoc(words);
+        doc.misc["y"] = y;
+        self.addDoc(doc);
       })
     .define_method(
       "f",

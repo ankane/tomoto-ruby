@@ -13,7 +13,8 @@ Gem::Specification.new do |spec|
   spec.files         = Dir[
     "*.{md,txt}", "{ext,lib}/**/*", "vendor/**/{README*,LICENSE*,COPYING*}",
     "vendor/eigen/Eigen/**/*", "vendor/EigenRand/EigenRand/**/*",
-    "vendor/tomotopy/src/{Labeling,TopicModel,Utils}/**/*"
+    "vendor/tomotopy/src/{Labeling,TopicModel,Utils}/**/*",
+    "vendor/variant/include/**/*"
   ]
   spec.require_path  = "lib"
   spec.extensions    = ["ext/tomoto/extconf.rb"]
