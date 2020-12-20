@@ -391,6 +391,23 @@ void Init_ext()
         self.addDoc(doc);
       })
     .define_method(
+      "alpha",
+      *[](tomoto::IDMRModel& self) {
+        Array res;
+        for (size_t i = 0; i < self.getK(); i++) {
+          auto l = self.getLambdaByTopic(i);
+          Eigen::Map<Eigen::ArrayXf> ml { l.data(), (Eigen::Index) l.size() };
+          ml = ml.exp();
+
+          Array res2;
+          for (size_t j = 0; j < l.size(); j++) {
+            res2.push(l[j]);
+          }
+          res.push(res2);
+        }
+        return res;
+      })
+    .define_method(
       "alpha_epsilon",
       *[](tomoto::IDMRModel& self) {
         return self.getAlphaEps();
@@ -447,6 +464,19 @@ void Init_ext()
         self.addDoc(doc);
       })
     .define_method(
+      "alpha",
+      *[](tomoto::IDTModel& self) {
+        Array res;
+        for (size_t i = 0; i < self.getK(); i++) {
+          Array res2;
+          for (size_t j = 0; j < self.getT(); j++) {
+            res2.push(self.getAlpha(i, j));
+          }
+          res.push(res2);
+        }
+        return res;
+      })
+    .define_method(
       "lr_a",
       *[](tomoto::IDTModel& self) {
         return self.getShapeA();
@@ -501,7 +531,7 @@ void Init_ext()
       })
     .define_method(
       "_add_doc",
-      *[](tomoto::IDMRModel& self, std::vector<std::string> words, std::vector<tomoto::Float> metadata) {
+      *[](tomoto::IGDMRModel& self, std::vector<std::string> words, std::vector<tomoto::Float> metadata) {
         auto doc = buildDoc(words);
         doc.misc["metadata"] = metadata;
         self.addDoc(doc);

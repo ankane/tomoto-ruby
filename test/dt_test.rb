@@ -4,8 +4,7 @@ class DTTest < Minitest::Test
   def test_works
     model = Tomoto::DT.new
     assert_kind_of Tomoto::LDA, model
-    # segfaults in Python
-    # assert_elements_in_delta [0.1], model.alpha
+    assert_elements_in_delta [[0]], model.alpha
     assert_in_delta 0.1, model.eta
     assert_in_delta 0.01, model.lr_a
     assert_in_delta 0.1, model.lr_b
