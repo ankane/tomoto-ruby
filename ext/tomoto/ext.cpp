@@ -391,23 +391,6 @@ void Init_ext()
         self.addDoc(doc);
       })
     .define_method(
-      "alpha",
-      *[](tomoto::IDMRModel& self) {
-        Array res;
-        for (size_t i = 0; i < self.getK(); i++) {
-          auto l = self.getLambdaByTopic(i);
-          Eigen::Map<Eigen::ArrayXf> ml { l.data(), (Eigen::Index) l.size() };
-          ml = ml.exp();
-
-          Array res2;
-          for (size_t j = 0; j < l.size(); j++) {
-            res2.push(l[j]);
-          }
-          res.push(res2);
-        }
-        return res;
-      })
-    .define_method(
       "alpha_epsilon",
       *[](tomoto::IDMRModel& self) {
         return self.getAlphaEps();
