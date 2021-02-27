@@ -50,6 +50,13 @@ Load the model from a file
 model = Tomoto::LDA.load("model.bin")
 ```
 
+Get topic probabilities for a document [master]
+
+```ruby
+doc = model.docs[0]
+doc.topics
+```
+
 Get the number of words for each topic
 
 ```ruby

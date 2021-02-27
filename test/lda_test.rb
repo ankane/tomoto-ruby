@@ -37,12 +37,10 @@ class LDATest < Minitest::Test
     model.add_doc(["another", "document"])
     model.add_doc(["a", "new", "document"])
     model.train(100)
-    topics = model.docs[0].topics
 
-    assert_equal 0, topics[0][0]
-    assert_equal 1, topics[1][0]
-    assert_in_delta 0.4222874939441681, topics[0][1]
-    assert_in_delta 0.5777125954627991, topics[1][1]
+    topics = model.docs[0].topics
+    assert_in_delta 0.4222874939441681, topics[0]
+    assert_in_delta 0.5777125954627991, topics[1]
   end
 
   def test_tw_invalid

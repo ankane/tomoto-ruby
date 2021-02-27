@@ -23,13 +23,10 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "topics",
       *[](DocumentObject& self) {
-        Rice::Array res;
+        Rice::Hash res;
         auto topics = self.tm->getTopicsByDoc(self.doc);
         for (size_t i = 0; i < topics.size(); i++) {
-          Rice::Array a;
-          a.push(i);
-          a.push(topics[i]);
-          res.push(a);
+          res[i] = topics[i];
         }
         return res;
       });
