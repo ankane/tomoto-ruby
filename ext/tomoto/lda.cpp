@@ -9,7 +9,31 @@
 
 #include "utils.h"
 
+class DocumentObject
+{
+public:
+  DocumentObject(const tomoto::DocumentBase* _doc, const tomoto::ITopicModel* _tm) : doc{ _doc }, tm{ _tm } {}
+
+  const tomoto::DocumentBase* doc;
+  const tomoto::ITopicModel* tm;
+};
+
 void init_lda(Rice::Module& m) {
+  Rice::define_class_under<DocumentObject>(m, "Document")
+    .define_method(
+      "topics",
+      *[](DocumentObject& self) {
+        Rice::Array res;
+        auto topics = self.tm->getTopicsByDoc(self.doc);
+        for (size_t i = 0; i < topics.size(); i++) {
+          Rice::Array a;
+          a.push(i);
+          a.push(topics[i]);
+          res.push(a);
+        }
+        return res;
+      });
+
   Rice::define_class_under<tomoto::ILDAModel>(m, "LDA")
     .define_singleton_method(
       "_new",
@@ -50,6 +74,16 @@ void init_lda(Rice::Module& m) {
         Array res;
         for (auto const& v : self.getCountByTopic()) {
           res.push(v);
+        }
+        return res;
+      })
+    .define_method(
+      "docs",
+      *[](tomoto::ILDAModel& self) {
+        Array res;
+        auto n = self.getNumDocs();
+        for (size_t i = 0; i < n; i++) {
+          res.push(DocumentObject(self.getDoc(i), &self));
         }
         return res;
       })

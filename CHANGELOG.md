@@ -1,5 +1,6 @@
 ## 0.1.4 (unreleased)
 
+- Added `docs` method
 - Updated tomoto to 0.10.2
 - Updated `add_doc` to return the index of the document
 
