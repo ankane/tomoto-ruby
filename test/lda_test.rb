@@ -33,16 +33,16 @@ class LDATest < Minitest::Test
 
   def test_topics
     model = Tomoto::LDA.new(k: 2, seed: 42)
-    model.add_doc(["this is a test"])
-    model.add_doc(["another document"])
-    model.add_doc(["a new document"])
+    model.add_doc(["this", "is", "a", "test"])
+    model.add_doc(["another", "document"])
+    model.add_doc(["a", "new", "document"])
     model.train(100)
     topics = model.docs[0].topics
 
     assert_equal 0, topics[0][0]
     assert_equal 1, topics[1][0]
-    assert_in_delta 0.11158929020166397, topics[0][1]
-    assert_in_delta 0.888410747051239, topics[1][1]
+    assert_in_delta 0.4222874939441681, topics[0][1]
+    assert_in_delta 0.5777125954627991, topics[1][1]
   end
 
   def test_tw_invalid
