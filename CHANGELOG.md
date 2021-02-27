@@ -1,5 +1,6 @@
 ## 0.1.4 (unreleased)
 
+- Updated tomoto to 0.10.2
 - Updated `add_doc` to return the index of the document
 
 ## 0.1.3 (2020-12-19)
