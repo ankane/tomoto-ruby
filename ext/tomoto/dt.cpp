@@ -21,7 +21,7 @@ void init_dt(Rice::Module& m) {
       *[](tomoto::IDTModel& self, std::vector<std::string> words, uint32_t timepoint) {
         auto doc = buildDoc(words);
         doc.misc["timepoint"] = timepoint;
-        self.addDoc(doc);
+        return self.addDoc(doc);
       })
     .define_method(
       "alpha",

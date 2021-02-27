@@ -19,7 +19,7 @@ void init_plda(Rice::Module& m) {
       *[](tomoto::IPLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
         auto doc = buildDoc(words);
         doc.misc["labels"] = labels;
-        self.addDoc(doc);
+        return self.addDoc(doc);
       })
     .define_method(
       "latent_topics",

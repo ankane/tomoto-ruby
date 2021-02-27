@@ -16,7 +16,7 @@ void init_mglda(Rice::Module& m) {
       *[](tomoto::IMGLDAModel& self, std::vector<std::string> words, std::string delimiter) {
         auto doc = buildDoc(words);
         doc.misc["delimiter"] = delimiter;
-        self.addDoc(doc);
+        return self.addDoc(doc);
       })
     .define_method(
       "alpha_g",

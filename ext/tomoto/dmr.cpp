@@ -20,7 +20,7 @@ void init_dmr(Rice::Module& m) {
       *[](tomoto::IDMRModel& self, std::vector<std::string> words, std::string metadata) {
         auto doc = buildDoc(words);
         doc.misc["metadata"] = metadata;
-        self.addDoc(doc);
+        return self.addDoc(doc);
       })
     .define_method(
       "alpha_epsilon",

@@ -19,7 +19,7 @@ void init_gdmr(Rice::Module& m) {
       *[](tomoto::IGDMRModel& self, std::vector<std::string> words, std::vector<tomoto::Float> metadata) {
         auto doc = buildDoc(words);
         doc.misc["metadata"] = metadata;
-        self.addDoc(doc);
+        return self.addDoc(doc);
       })
     .define_method(
       "degrees",
