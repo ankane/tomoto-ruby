@@ -67,6 +67,8 @@ class LDATest < Minitest::Test
   end
 
   def test_load_another_type
+    skip
+
     model = Tomoto::HDP.new
     model.save(tempfile)
 

@@ -33,16 +33,16 @@ void Init_ext()
       });
 
   init_lda(m);
-  init_ct(m);
-  init_dmr(m);
-  init_dt(m);
-  init_gdmr(m);
-  init_hdp(m);
-  init_hlda(m);
-  init_pa(m);
-  init_hpa(m);
-  init_mglda(m);
-  init_llda(m);
-  init_plda(m);
-  init_slda(m);
+  // init_ct(m);
+  // init_dmr(m);
+  // init_dt(m);
+  // init_gdmr(m);
+  // init_hdp(m);
+  // init_hlda(m);
+  // init_pa(m);
+  // init_hpa(m);
+  // init_mglda(m);
+  // init_llda(m);
+  // init_plda(m);
+  // init_slda(m);
 }

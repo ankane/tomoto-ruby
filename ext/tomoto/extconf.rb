@@ -25,7 +25,7 @@ eigen = File.expand_path("../../vendor/eigen", __dir__)
 eigen_rand = File.expand_path("../../vendor/EigenRand", __dir__)
 variant = File.expand_path("../../vendor/variant/include", __dir__)
 
-$srcs = Dir["{#{ext},#{tomoto}}/*.cpp"]
+$srcs = Dir["#{ext}/{ext,lda}.cpp", "#{tomoto}/LDAModel.cpp"]
 $INCFLAGS += " -I#{tomoto} -I#{eigen} -I#{eigen_rand} -I#{variant}"
 $VPATH << tomoto
 
