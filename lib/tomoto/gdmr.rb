@@ -8,8 +8,8 @@ module Tomoto
       init_params(model, binding)
     end
 
-    def add_doc(doc, metadata: [])
-      _add_doc(prepare_doc(doc), metadata)
+    def add_doc(doc, numeric_metadata: [])
+      _add_doc(prepare_doc(doc), numeric_metadata)
     end
   end
 end

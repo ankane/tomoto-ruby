@@ -10,11 +10,20 @@ void init_dt(Rice::Module& m) {
       "_new",
       *[](size_t tw, size_t k, size_t t, tomoto::Float alphaVar, tomoto::Float etaVar, tomoto::Float phiVar, tomoto::Float shapeA, tomoto::Float shapeB, tomoto::Float shapeC) {
         // Rice only supports 10 arguments
-        int seed = -1;
-        if (seed < 0) {
-          seed = std::random_device{}();
+        size_t seed = -1;
+        tomoto::DTArgs args;
+        args.k = k;
+        args.t = t;
+        args.alpha = {alphaVar};
+        args.eta = etaVar;
+        args.phi = phiVar;
+        args.shapeA = shapeA;
+        args.shapeB = shapeB;
+        args.shapeC = shapeC;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::IDTModel::create((tomoto::TermWeight)tw, k, t, alphaVar, etaVar, phiVar, shapeA, shapeB, shapeC, 0, seed);
+        return tomoto::IDTModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "_add_doc",

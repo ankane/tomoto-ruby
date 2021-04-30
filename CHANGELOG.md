@@ -1,3 +1,7 @@
+## 0.2.0 (unreleased)
+
+- Updated tomoto to 0.12.0
+
 ## 0.1.4 (2021-03-14)
 
 - Added `docs` method

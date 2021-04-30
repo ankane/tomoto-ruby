@@ -8,16 +8,24 @@ void init_slda(Rice::Module& m) {
   Rice::define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(m, "SLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, Array rb_vars, tomoto::Float alpha, tomoto::Float eta, std::vector<tomoto::Float> mu, std::vector<tomoto::Float> nu_sq, std::vector<tomoto::Float> glm_param, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
-        }
+      *[](size_t tw, size_t k, Array rb_vars, tomoto::Float alpha, tomoto::Float eta, std::vector<tomoto::Float> mu, std::vector<tomoto::Float> nu_sq, std::vector<tomoto::Float> glm_param, size_t seed) {
         std::vector<tomoto::ISLDAModel::GLM> vars;
         vars.reserve(rb_vars.size());
         for (auto const& v : rb_vars) {
           vars.push_back((tomoto::ISLDAModel::GLM) from_ruby<int>(v));
         }
-        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, k, vars, alpha, eta, mu, nu_sq, glm_param, seed);
+        tomoto::SLDAArgs args;
+        args.k = k;
+        args.vars = vars;
+        args.alpha = {alpha};
+        args.eta = eta;
+        args.mu = mu;
+        args.nuSq = nu_sq;
+        args.glmParam = glm_param;
+        if (seed >= 0) {
+          args.seed = seed;
+        }
+        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "_add_doc",

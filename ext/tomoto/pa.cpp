@@ -8,11 +8,16 @@ void init_pa(Rice::Module& m) {
   Rice::define_class_under<tomoto::IPAModel, tomoto::ILDAModel>(m, "PA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k1, size_t k2, tomoto::Float alpha, tomoto::Float eta, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
+      *[](size_t tw, size_t k1, size_t k2, tomoto::Float alpha, tomoto::Float eta, size_t seed) {
+        tomoto::PAArgs args;
+        args.k = k1;
+        args.k2 = k2;
+        args.alpha = {alpha};
+        args.eta = eta;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::IPAModel::create((tomoto::TermWeight)tw, k1, k2, alpha, eta, seed);
+        return tomoto::IPAModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "k1",

@@ -8,11 +8,16 @@ void init_hlda(Rice::Module& m) {
   Rice::define_class_under<tomoto::IHLDAModel, tomoto::ILDAModel>(m, "HLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t levelDepth, tomoto::Float alpha, tomoto::Float eta, tomoto::Float gamma, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
+      *[](size_t tw, size_t levelDepth, tomoto::Float alpha, tomoto::Float eta, tomoto::Float gamma, size_t seed) {
+        tomoto::HLDAArgs args;
+        args.k = levelDepth;
+        args.alpha = {alpha};
+        args.eta = eta;
+        args.gamma = gamma;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, levelDepth, alpha, eta, gamma, seed);
+        return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "alpha",

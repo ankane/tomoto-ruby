@@ -8,11 +8,15 @@ void init_plda(Rice::Module& m) {
   Rice::define_class_under<tomoto::IPLDAModel, tomoto::ILLDAModel>(m, "PLDA")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t latent_topics, tomoto::Float alpha, tomoto::Float eta, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
+      *[](size_t tw, size_t latent_topics, tomoto::Float alpha, tomoto::Float eta, size_t seed) {
+        tomoto::PLDAArgs args;
+        args.numLatentTopics = latent_topics;
+        args.alpha = {alpha};
+        args.eta = eta;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::IPLDAModel::create((tomoto::TermWeight)tw, latent_topics, 1, alpha, eta, seed);
+        return tomoto::IPLDAModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "_add_doc",

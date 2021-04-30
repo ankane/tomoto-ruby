@@ -9,11 +9,17 @@ void init_dmr(Rice::Module& m) {
   Rice::define_class_under<tomoto::IDMRModel, tomoto::ILDAModel>(m, "DMR")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float eta, tomoto::Float alpha_epsilon, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float eta, tomoto::Float alpha_epsilon, size_t seed) {
+        tomoto::DMRArgs args;
+        args.k = k;
+        args.alpha = {alpha};
+        args.sigma = sigma;
+        args.eta = eta;
+        args.alphaEps = alpha_epsilon;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::IDMRModel::create((tomoto::TermWeight)tw, k, alpha, sigma, eta, alpha_epsilon, seed);
+        return tomoto::IDMRModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "_add_doc",

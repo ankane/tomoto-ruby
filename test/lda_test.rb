@@ -39,8 +39,8 @@ class LDATest < Minitest::Test
     model.train(100)
 
     topics = model.docs[0].topics
-    assert_in_delta 0.4222874939441681, topics[0]
-    assert_in_delta 0.5777125954627991, topics[1]
+    assert_in_delta 0.41782236099243164, topics[0]
+    assert_in_delta 0.5821776986122131, topics[1]
   end
 
   def test_tw_invalid

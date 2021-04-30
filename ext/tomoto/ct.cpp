@@ -8,11 +8,15 @@ void init_ct(Rice::Module& m) {
   Rice::define_class_under<tomoto::ICTModel, tomoto::ILDAModel>(m, "CT")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, size_t seed) {
+        tomoto::CTArgs args;
+        args.k = k;
+        args.alpha = {alpha};
+        args.eta = eta;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::ICTModel::create((tomoto::TermWeight)tw, k, alpha, eta, seed);
+        return tomoto::ICTModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "_correlations",

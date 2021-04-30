@@ -8,11 +8,16 @@ void init_hdp(Rice::Module& m) {
   Rice::define_class_under<tomoto::IHDPModel, tomoto::ILDAModel>(m, "HDP")
     .define_singleton_method(
       "_new",
-      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, tomoto::Float gamma, int seed) {
-        if (seed < 0) {
-          seed = std::random_device{}();
+      *[](size_t tw, size_t k, tomoto::Float alpha, tomoto::Float eta, tomoto::Float gamma, size_t seed) {
+        tomoto::HDPArgs args;
+        args.k = k;
+        args.alpha = {alpha};
+        args.eta = eta;
+        args.gamma = gamma;
+        if (seed >= 0) {
+          args.seed = seed;
         }
-        return tomoto::IHDPModel::create((tomoto::TermWeight)tw, k, alpha, eta, gamma, seed);
+        return tomoto::IHDPModel::create((tomoto::TermWeight)tw, args);
       })
     .define_method(
       "alpha",
