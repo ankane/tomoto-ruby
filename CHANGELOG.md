@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2021-05-23)
 
 - Updated tomoto to 0.12.0
 - Dropped support for Ruby < 2.6
