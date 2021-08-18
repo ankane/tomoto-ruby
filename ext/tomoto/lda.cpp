@@ -50,6 +50,33 @@ void init_lda(Rice::Module& m) {
         return self.addDoc(buildDoc(words));
       })
     .define_method(
+      "_make_doc",
+      *[](tomoto::ILDAModel& self, std::vector<std::string> words) {
+        return DocumentObject(self.makeDoc(buildDoc(words)).release(), &self);
+      })
+    .define_method(
+      "_infer",
+      *[](tomoto::ILDAModel& self, DocumentObject& doc_object) {
+        size_t iteration = 100, workers = 0, together = 0, ps = 0;
+        float tolerance = -1;
+
+        std::vector<tomoto::DocumentBase*> docs;
+        auto doc = doc_object.doc;
+        docs.emplace_back(const_cast<tomoto::DocumentBase*>(doc));
+        float ll = self.infer(docs, iteration, tolerance, workers, (tomoto::ParallelScheme)ps, !!together)[0];
+
+        auto topic_dist = self.getTopicsByDoc(doc);
+        auto topic_res = Array();
+        for (size_t i = 0; i < topic_dist.size(); i++) {
+          topic_res.push(topic_dist[i]);
+        }
+
+        auto res = Array();
+        res.push(topic_res);
+        res.push(ll);
+        return res;
+      })
+    .define_method(
       "alpha",
       *[](tomoto::ILDAModel& self) {
         Array res;

@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Added support for unseen documents
+
 ## 0.2.0 (2021-05-23)
 
 - Updated tomoto to 0.12.0

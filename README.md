@@ -75,6 +75,13 @@ Get the log likelihood per word
 model.ll_per_word
 ```
 
+Perform inference for unseen documents [unreleased]
+
+```ruby
+doc = model.make_doc("unseen doc")
+topic_dist, ll = model.infer(doc)
+```
+
 ## Models
 
 Supports:

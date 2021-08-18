@@ -59,6 +59,19 @@ class LDATest < Minitest::Test
     assert_equal "cannot add_doc() after train()", error.message
   end
 
+  def test_infer
+    model = Tomoto::LDA.new(k: 2, seed: 42)
+    model.add_doc(["this", "is", "a", "test"])
+    model.add_doc(["another", "document"])
+    model.add_doc(["a", "new", "document"])
+    model.train(100)
+
+    doc = model.make_doc(["unseen", "document"])
+    topic_dist, ll = model.infer(doc)
+    assert_elements_in_delta [0.47528052, 0.52471954], topic_dist
+    assert_in_delta(-1.5038636922836304, ll)
+  end
+
   def test_load_missing
     error = assert_raises(RuntimeError) do
       Tomoto::LDA.load("missing.bin")

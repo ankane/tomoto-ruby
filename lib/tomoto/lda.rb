@@ -18,6 +18,17 @@ module Tomoto
       _add_doc(prepare_doc(doc))
     end
 
+    def make_doc(doc)
+      _make_doc(tokenize_doc(doc))
+    end
+
+    # TODO support multiple docs
+    # TODO add keyword arguments
+    def infer(doc)
+      raise "cannot infer with untrained model" unless defined?(@prepared)
+      _infer(doc)
+    end
+
     def count_by_topics
       prepare
       _count_by_topics
@@ -96,6 +107,10 @@ module Tomoto
 
     def prepare_doc(doc)
       raise "cannot add_doc() after train()" if defined?(@prepared)
+      tokenize_doc(doc)
+    end
+
+    def tokenize_doc(doc)
       doc = doc.split(/[[:space:]]+/) unless doc.is_a?(Array)
       doc
     end
