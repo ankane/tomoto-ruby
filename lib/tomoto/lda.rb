@@ -23,10 +23,9 @@ module Tomoto
     end
 
     # TODO support multiple docs
-    # TODO add keyword arguments
-    def infer(doc)
+    def infer(doc, iter: 100, tolerance: -1, workers: 0, parallel: :default, together: 0)
       raise "cannot infer with untrained model" unless defined?(@prepared)
-      _infer(doc)
+      _infer(doc, iter, tolerance, workers, to_ps(parallel), together)
     end
 
     def count_by_topics
