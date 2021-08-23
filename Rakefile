@@ -23,3 +23,6 @@ task :remove_ext do
 end
 
 Rake::Task["build"].enhance [:check_license, :remove_ext]
+
+# rake clean excludes **/core by default
+CLEAN.exclude("**/Eigen/Core")
