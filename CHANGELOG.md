@@ -1,3 +1,7 @@
+## 0.2.2 (2021-08-23)
+
+- Reduced gem size
+
 ## 0.2.1 (2021-08-23)
 
 - Added support for unseen documents
