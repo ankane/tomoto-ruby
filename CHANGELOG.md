@@ -1,4 +1,4 @@
-## 0.2.1 (unreleased)
+## 0.2.1 (2021-08-23)
 
 - Added support for unseen documents
 
