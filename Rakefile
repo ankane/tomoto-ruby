@@ -16,7 +16,7 @@ exttask = Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
   ext.ext_dir = "ext/tomoto"
   ext.lib_dir = File.join(*["lib", "tomoto", ENV["FAT_DIR"]].compact)
   ext.cross_compile = true
-  ext.cross_platform = %w[x86_64-linux x86_64-darwin arm64-darwin x64-mingw32]
+  ext.cross_platform = %w[x86_64-linux x86_64-darwin]
 end
 
 namespace "gem" do
