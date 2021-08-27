@@ -1,4 +1,4 @@
-## 0.3.0 (unreleased)
+## 0.3.0 (2021-08-26)
 
 - Added precompiled gems for Linux and Mac
 
