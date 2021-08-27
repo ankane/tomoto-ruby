@@ -8,9 +8,39 @@ Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
 end
 
-Rake::ExtensionTask.new("tomoto") do |ext|
-  ext.name = "ext"
-  ext.lib_dir = "lib/tomoto"
+ENV["RUBY_CC_VERSION"] = "3.0.0:2.7.0:2.6.0"
+ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.14"
+
+gemspec = Bundler.load_gemspec("tomoto.gemspec")
+exttask = Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
+  ext.ext_dir = "ext/tomoto"
+  ext.lib_dir = File.join(*["lib", "tomoto", ENV["FAT_DIR"]].compact)
+  ext.cross_compile = true
+  ext.cross_platform = %w[x86_64-linux x86_64-darwin arm64-darwin x64-mingw32]
+end
+
+namespace "gem" do
+  exttask.cross_platform.each do |platform|
+    desc "Build the native binary gems"
+    multitask "native" => platform
+
+    task "prepare" do
+      require "rake_compiler_dock"
+    end
+
+    desc "Build the native binary gem for #{platform}"
+    task platform => "prepare" do
+      # prevent circular dependency error
+      Dir["lib/tomoto/{2.6,2.7,3.0}/*.{bundle,so}"].each do |path|
+        File.unlink(path)
+      end
+
+      RakeCompilerDock.sh <<~EOS, platform: platform
+        bundle --local &&
+        bundle exec rake native:#{platform} pkg/#{exttask.gem_spec.full_name}-#{platform}.gem --verbose
+      EOS
+    end
+  end
 end
 
 task :check_license do

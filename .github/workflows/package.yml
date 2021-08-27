@@ -1,0 +1,25 @@
+name: build
+on:
+  push:
+    branches:
+      - package
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [x86_64-linux, x86_64-darwin]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    - run: bundle package --all
+    - run: bundle exec rake gem:${{ matrix.platform }}
+    - uses: actions/upload-artifact@v2
+      with:
+        path: pkg/*.gem
