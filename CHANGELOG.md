@@ -1,4 +1,4 @@
-## 0.2.3 (unreleased)
+## 0.2.3 (2021-08-26)
 
 - Updated to Rice 4
 
