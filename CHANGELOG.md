@@ -1,3 +1,7 @@
+## 0.2.3 (unreleased)
+
+- Updated to Rice 4
+
 ## 0.2.2 (2021-08-23)
 
 - Reduced gem size

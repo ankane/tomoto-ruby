@@ -1,8 +1,6 @@
 require "mkmf-rice"
 
-abort "Missing stdc++" unless have_library("stdc++")
-
-$CXXFLAGS += " -std=c++14 -DEIGEN_MPL2_ONLY"
+$CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
 $CXXFLAGS += " -march=native"
 
