@@ -2,7 +2,9 @@ require "mkmf-rice"
 
 $CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
-$CXXFLAGS += " -march=native"
+unless ENV["RUBY_CC_VERSION"]
+  $CXXFLAGS << " " << with_config("optflags", "-march=native")
+end
 
 apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 
@@ -27,4 +29,4 @@ $srcs = Dir["{#{ext},#{tomoto}}/*.cpp"]
 $INCFLAGS += " -I#{tomoto} -I#{eigen} -I#{eigen_rand} -I#{variant}"
 $VPATH << tomoto
 
-create_makefile("tomoto/ext")
+create_makefile("tomoto/tomoto")

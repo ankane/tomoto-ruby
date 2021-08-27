@@ -1,5 +1,9 @@
 # ext
-require "tomoto/ext"
+begin
+  require "tomoto/#{RUBY_VERSION.to_f}/tomoto"
+rescue LoadError
+  require "tomoto/tomoto"
+end
 
 # modules
 require "tomoto/ct"

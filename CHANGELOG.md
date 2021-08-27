@@ -1,3 +1,7 @@
+## 0.3.0 (unreleased)
+
+- Added precompiled gems for Linux and Mac
+
 ## 0.2.3 (2021-08-26)
 
 - Updated to Rice 4
