@@ -1,8 +1,8 @@
-# tomoto
+# tomoto Ruby
 
 :tomato: [tomoto](https://github.com/bab2min/tomotopy) - high performance topic modeling - for Ruby
 
-[![Build Status](https://github.com/ankane/tomoto/workflows/build/badge.svg?branch=master)](https://github.com/ankane/tomoto/actions)
+[![Build Status](https://github.com/ankane/tomoto-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/tomoto-ruby/actions)
 
 ## Installation
 
@@ -142,22 +142,22 @@ Supported values are `:default`, `:none`, `:copy_merge`, and `:partition`.
 
 ## History
 
-View the [changelog](https://github.com/ankane/tomoto/blob/master/CHANGELOG.md)
+View the [changelog](https://github.com/ankane/tomoto-ruby/blob/master/CHANGELOG.md)
 
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/ankane/tomoto/issues)
-- Fix bugs and [submit pull requests](https://github.com/ankane/tomoto/pulls)
+- [Report bugs](https://github.com/ankane/tomoto-ruby/issues)
+- Fix bugs and [submit pull requests](https://github.com/ankane/tomoto-ruby/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
 
 To get started with development:
 
 ```sh
-git clone --recursive https://github.com/ankane/tomoto.git
-cd tomoto
+git clone --recursive https://github.com/ankane/tomoto-ruby.git
+cd tomoto-ruby
 bundle install
 bundle exec rake compile
 bundle exec rake test

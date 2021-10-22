@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "tomoto"
   spec.version       = Tomoto::VERSION
   spec.summary       = "High performance topic modeling for Ruby"
-  spec.homepage      = "https://github.com/ankane/tomoto"
+  spec.homepage      = "https://github.com/ankane/tomoto-ruby"
   spec.license       = "MIT"
 
   spec.author        = "Andrew Kane"
