@@ -1,4 +1,4 @@
-# tomoto Ruby
+# tomoto.rb
 
 :tomato: [tomoto](https://github.com/bab2min/tomotopy) - high performance topic modeling - for Ruby
 
