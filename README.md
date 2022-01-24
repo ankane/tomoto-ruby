@@ -9,7 +9,7 @@
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem 'tomoto'
+gem "tomoto"
 ```
 
 It can take 10-20 minutes to compile the extension.
