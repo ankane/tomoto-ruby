@@ -2,7 +2,9 @@ require "mkmf-rice"
 
 $CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
-$CXXFLAGS += " -march=native"
+# AVX-512F not support yet
+# https://github.com/bab2min/tomotopy/issues/188
+$CXXFLAGS += " -march=native -mno-avx512f"
 
 apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 
