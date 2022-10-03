@@ -1,6 +1,6 @@
 ## 0.2.4 (unreleased)
 
-- Updated tomoto to 0.12.2
+- Updated tomoto to 0.12.3
 
 ## 0.2.3 (2021-08-26)
 
