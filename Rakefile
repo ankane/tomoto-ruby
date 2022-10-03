@@ -8,7 +8,7 @@ Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
 end
 
-ENV["RUBY_CC_VERSION"] = "3.0.0:2.7.0:2.6.0"
+ENV["RUBY_CC_VERSION"] = "3.1.0:3.0.0:2.7.0"
 ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.14"
 
 gemspec = Bundler.load_gemspec("tomoto.gemspec")
@@ -30,11 +30,6 @@ namespace "gem" do
 
     desc "Build the native binary gem for #{platform}"
     task platform => "prepare" do
-      # prevent circular dependency error
-      Dir["lib/tomoto/{2.6,2.7,3.0}/*.{bundle,so}"].each do |path|
-        File.unlink(path)
-      end
-
       RakeCompilerDock.sh <<~EOS, platform: platform
         bundle --local &&
         bundle exec rake native:#{platform} pkg/#{exttask.gem_spec.full_name}-#{platform}.gem --verbose

@@ -1,6 +1,7 @@
-## 0.3.0 (2021-08-26)
+## 0.3.0 (unreleased)
 
 - Added precompiled gems for Linux and Mac
+- Dropped support for Ruby < 2.7
 
 ## 0.2.3 (2021-08-26)
 
