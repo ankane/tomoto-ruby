@@ -11,16 +11,21 @@ end
 ENV["RUBY_CC_VERSION"] = "3.1.0:3.0.0:2.7.0"
 ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.14"
 
+platforms = ["x86_64-linux", "x86_64-darwin"]
+
 gemspec = Bundler.load_gemspec("tomoto.gemspec")
-exttask = Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
+Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
   ext.ext_dir = "ext/tomoto"
   ext.lib_dir = "lib/tomoto"
   ext.cross_compile = true
-  ext.cross_platform = %w[x86_64-linux x86_64-darwin]
+  ext.cross_platform = platforms
+  ext.cross_compiling do |spec|
+    spec.dependencies.reject! { |dep| dep.name == "rice" }
+  end
 end
 
 namespace "gem" do
-  exttask.cross_platform.each do |platform|
+  platforms.each do |platform|
     desc "Build the native binary gems"
     multitask "native" => platform
 
@@ -32,9 +37,17 @@ namespace "gem" do
     task platform => "prepare" do
       RakeCompilerDock.sh <<~EOS, platform: platform
         bundle --local &&
-        bundle exec rake native:#{platform} pkg/#{exttask.gem_spec.full_name}-#{platform}.gem --verbose
+        bundle exec rake native:#{platform} pkg/#{gemspec.full_name}-#{platform}.gem --verbose
       EOS
     end
+  end
+end
+
+task :release_platform do
+  require_relative "lib/tomoto/version"
+
+  Dir["pkg/tomoto-#{Tomoto::VERSION}-*.gem"].each do |file|
+    # sh "gem", "push", file
   end
 end
 
