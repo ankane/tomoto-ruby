@@ -24,17 +24,19 @@ Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
   end
 end
 
-namespace "gem" do
+namespace :gem do
+  task :prepare do
+    require "rake_compiler_dock"
+    sh "bundle", "config", "set", "cache_all", "true"
+    sh "bundle", "package"
+  end
+
   platforms.each do |platform|
     desc "Build the native binary gems"
-    multitask "native" => platform
-
-    task "prepare" do
-      require "rake_compiler_dock"
-    end
+    multitask :native => platform
 
     desc "Build the native binary gem for #{platform}"
-    task platform => "prepare" do
+    task platform => :prepare do
       RakeCompilerDock.sh <<~EOS, platform: platform
         bundle --local &&
         bundle exec rake native:#{platform} pkg/#{gemspec.full_name}-#{platform}.gem --verbose
