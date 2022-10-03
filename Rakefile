@@ -14,7 +14,7 @@ ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.14"
 gemspec = Bundler.load_gemspec("tomoto.gemspec")
 exttask = Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
   ext.ext_dir = "ext/tomoto"
-  ext.lib_dir = File.join(*["lib", "tomoto", ENV["FAT_DIR"]].compact)
+  ext.lib_dir = "lib/tomoto"
   ext.cross_compile = true
   ext.cross_platform = %w[x86_64-linux x86_64-darwin]
 end
