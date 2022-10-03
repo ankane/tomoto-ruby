@@ -2,9 +2,11 @@ require "mkmf-rice"
 
 $CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
-# AVX-512F not support yet
-# https://github.com/bab2min/tomotopy/issues/188
-$CXXFLAGS += " -march=native -mno-avx512f"
+unless ENV["RUBY_CC_VERSION"]
+  # AVX-512F not support yet
+  # https://github.com/bab2min/tomotopy/issues/188
+  $CXXFLAGS << " " << with_config("optflags", "-march=native -mno-avx512f")
+end
 
 apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 
@@ -29,4 +31,4 @@ $srcs = Dir["{#{ext},#{tomoto}}/*.cpp"]
 $INCFLAGS += " -I#{tomoto} -I#{eigen} -I#{eigen_rand} -I#{variant}"
 $VPATH << tomoto
 
-create_makefile("tomoto/ext")
+create_makefile("tomoto/tomoto")

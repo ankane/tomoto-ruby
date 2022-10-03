@@ -1,5 +1,6 @@
 ## 0.3.0 (unreleased)
 
+- Added precompiled gems for Linux and Mac
 - Updated tomoto to 0.12.3
 - Dropped support for Ruby < 2.7
 
