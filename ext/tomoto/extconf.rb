@@ -2,7 +2,7 @@ require "mkmf-rice"
 
 $CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
-# $CXXFLAGS += " -march=native"
+$CXXFLAGS += " -mavx512f"
 
 apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 
