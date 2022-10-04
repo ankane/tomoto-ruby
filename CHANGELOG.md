@@ -1,4 +1,4 @@
-## 0.3.0 (unreleased)
+## 0.3.0 (2022-10-03)
 
 - Added precompiled gems for Linux and Mac
 - Updated tomoto to 0.12.3
