@@ -21,6 +21,7 @@ Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
   ext.cross_platform = platforms
   ext.cross_compiling do |spec|
     spec.dependencies.reject! { |dep| dep.name == "rice" }
+    spec.files.reject! { |file| File.fnmatch?("vendor/**.{c,cpp,h,hpp}", file, File::FNM_EXTGLOB) }
   end
 end
 
