@@ -49,12 +49,12 @@ void init_lda(Rice::Module& m) {
       })
     .define_method(
       "_make_doc",
-      *[](tomoto::ILDAModel& self, std::vector<std::string> words) {
+      [](tomoto::ILDAModel& self, std::vector<std::string> words) {
         return DocumentObject(self.makeDoc(buildDoc(words)).release(), &self);
       })
     .define_method(
       "_infer",
-      *[](tomoto::ILDAModel& self, DocumentObject& doc_object, size_t iteration, float tolerance, size_t workers, size_t ps, size_t together) {
+      [](tomoto::ILDAModel& self, DocumentObject& doc_object, size_t iteration, float tolerance, size_t workers, size_t ps, size_t together) {
         std::vector<tomoto::DocumentBase*> docs;
         auto doc = doc_object.doc;
         docs.emplace_back(const_cast<tomoto::DocumentBase*>(doc));
