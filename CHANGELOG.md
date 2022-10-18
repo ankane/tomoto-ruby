@@ -1,7 +1,3 @@
-## 0.3.1 (unreleased)
-
-- Fixed installation error with ARM Mac
-
 ## 0.3.0 (2022-10-03)
 
 - Added precompiled gems for Linux and Mac
