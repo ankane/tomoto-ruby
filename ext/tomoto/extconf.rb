@@ -3,9 +3,17 @@ require "mkmf-rice"
 $CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
 unless ENV["RUBY_CC_VERSION"]
-  # AVX-512F not support yet
-  # https://github.com/bab2min/tomotopy/issues/188
-  $CXXFLAGS << " " << with_config("optflags", "-march=native -mno-avx512f")
+  default_optflags =
+    if RbConfig::CONFIG["host_os"] =~ /darwin/i && RbConfig::CONFIG["host_cpu"] =~ /arm|aarch64/i
+      # -march=native not supported with ARM Mac
+      ""
+    else
+      # AVX-512F not support yet
+      # https://github.com/bab2min/tomotopy/issues/188
+      "-march=native -mno-avx512f"
+    end
+
+  $CXXFLAGS << " " << with_config("optflags", default_optflags)
 end
 
 apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
