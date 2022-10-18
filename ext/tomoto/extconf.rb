@@ -8,7 +8,7 @@ unless ENV["RUBY_CC_VERSION"]
       # -march=native not supported with ARM Mac
       ""
     else
-      # AVX-512F not support yet
+      # AVX-512F not supported yet
       # https://github.com/bab2min/tomotopy/issues/188
       "-march=native -mno-avx512f"
     end
