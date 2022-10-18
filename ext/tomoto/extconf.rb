@@ -3,7 +3,10 @@ require "mkmf-rice"
 $CXXFLAGS += " -std=c++17 $(optflags) -DEIGEN_MPL2_ONLY"
 
 unless ENV["RUBY_CC_VERSION"]
-  # AVX-512F not support yet
+  # ARM not supported yet
+  # https://github.com/bab2min/tomotopy/issues/170
+
+  # AVX-512F not supported yet
   # https://github.com/bab2min/tomotopy/issues/188
   $CXXFLAGS << " " << with_config("optflags", "-march=native -mno-avx512f")
 end
