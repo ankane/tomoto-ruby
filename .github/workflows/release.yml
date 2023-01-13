@@ -1,0 +1,25 @@
+name: release
+on: workflow_dispatch
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: x86_64-linux
+          - platform: x86_64-darwin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - run: bundle install
+      - run: bundle exec rake gem:${{ matrix.platform }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: native-gem
+          path: pkg/*.gem
+          retention-days: 1
