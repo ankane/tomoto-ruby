@@ -1,3 +1,7 @@
+## 0.3.1 (2023-01-12)
+
+- Added support for Ruby 3.2
+
 ## 0.3.0 (2022-10-03)
 
 - Added precompiled gems for Linux and Mac
