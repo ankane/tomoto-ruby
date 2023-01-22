@@ -1,14 +1,14 @@
 name: release
-on: workflow_dispatch
+on: push
 jobs:
   release:
     strategy:
       fail-fast: false
       matrix:
         include:
-          - platform: x86_64-linux
+          # - platform: x86_64-linux
           - platform: aarch64-linux
-          - platform: x86_64-darwin
+          # - platform: x86_64-darwin
           - platform: arm64-darwin
     runs-on: ubuntu-latest
     steps:
