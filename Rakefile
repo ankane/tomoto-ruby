@@ -11,7 +11,14 @@ end
 ENV["RUBY_CC_VERSION"] = "3.2.0:3.1.0:3.0.0:2.7.0"
 ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.14"
 
-platforms = ["x86_64-linux", "x86_64-darwin"]
+platforms = [
+  "x86_64-linux",
+  "aarch64-linux",
+  "x86_64-darwin",
+  "arm64-darwin",
+  "x64-mingw-ucrt",
+  "x64-mingw32"
+]
 
 gemspec = Bundler.load_gemspec("tomoto.gemspec")
 Rake::ExtensionTask.new("tomoto", gemspec) do |ext|
