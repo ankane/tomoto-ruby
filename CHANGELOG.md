@@ -1,3 +1,7 @@
+## 0.3.2 (unreleased)
+
+- Updated tomoto to 0.12.4
+
 ## 0.3.1 (2023-01-12)
 
 - Added support for Ruby 3.2
