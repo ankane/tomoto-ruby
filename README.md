@@ -12,8 +12,6 @@ Add this line to your application’s Gemfile:
 gem "tomoto"
 ```
 
-ARM is not currently supported
-
 ## Getting Started
 
 Train a model
