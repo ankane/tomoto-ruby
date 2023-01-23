@@ -1,5 +1,6 @@
-## 0.3.2 (unreleased)
+## 0.3.2 (2023-01-22)
 
+- Added precompiled gem for Mac ARM
 - Updated tomoto to 0.12.4
 
 ## 0.3.1 (2023-01-12)
