@@ -1,3 +1,7 @@
+## 0.3.3 (unreleased)
+
+- Added `topic_label_dict` method to `LLDA`
+
 ## 0.3.2 (2023-01-22)
 
 - Added precompiled gem for Mac ARM
