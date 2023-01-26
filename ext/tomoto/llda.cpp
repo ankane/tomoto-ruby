@@ -29,5 +29,18 @@ void init_llda(Rice::Module& m) {
       "topics_per_label",
       [](tomoto::ILLDAModel& self) {
         return self.getNumTopicsPerLabel();
+      })
+    .define_method(
+      "topic_label_dict",
+      [](tomoto::ILLDAModel& self) {
+        auto dict = self.getTopicLabelDict();
+        Array res;
+        auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
+        for (size_t i = 0; i < dict.size(); i++) {
+          VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
+          Object obj(value);
+          res.push(obj.call("force_encoding", utf8));
+        }
+        return res;
       });
 }
