@@ -10,6 +10,6 @@ class LLDATest < Minitest::Test
     model.add_doc(["cuban", "sandwiches"], labels: ["ham"])
     assert model.summary
 
-    assert model.topic_label_dict == ["spam", "ham"]
+    assert_equal ["spam", "ham"], model.topic_label_dict
   end
 end
