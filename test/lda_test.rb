@@ -72,6 +72,41 @@ class LDATest < Minitest::Test
     assert_in_delta(-1.5038636922836304, ll)
   end
 
+  def test_infer_after_load_of_trained_model
+    steps = 100
+    model = Tomoto::LDA.new(k: 2, seed: 42)
+    model.add_doc(["this", "is", "a", "test"])
+    model.add_doc(["another", "document"])
+    model.add_doc(["a", "new", "document"])
+    model.train(steps)
+
+    model.save(tempfile)
+    model = Tomoto::LDA.load(tempfile)
+
+    assert_equal steps, model.global_step
+
+    doc = model.make_doc(["unseen", "document"])
+    topic_dist, ll = model.infer(doc)
+    assert_elements_in_delta [0.47528052, 0.52471954], topic_dist
+    assert_in_delta(-1.5038636922836304, ll)
+  end
+
+  def test_infer_after_load_of_untrained_model
+    model = Tomoto::LDA.new(k: 2, seed: 42)
+    model.add_doc(["this", "is", "a", "test"])
+    model.add_doc(["another", "document"])
+    model.add_doc(["a", "new", "document"])
+
+    model.save(tempfile)
+    model = Tomoto::LDA.load(tempfile)
+
+    doc = model.make_doc(["unseen", "document"])
+    error = assert_raises(RuntimeError) do
+      model.infer(doc)
+    end
+    assert_equal "cannot infer with untrained model", error.message
+  end
+
   def test_load_missing
     error = assert_raises(RuntimeError) do
       Tomoto::LDA.load("missing.bin")
