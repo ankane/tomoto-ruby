@@ -24,7 +24,7 @@ module Tomoto
 
     # TODO support multiple docs
     def infer(doc, iter: 100, tolerance: -1, workers: 0, parallel: :default, together: 0)
-      raise "cannot infer with untrained model" unless prepared?
+      raise "cannot infer with untrained model" unless global_step.positive?
       _infer(doc, iter, tolerance, workers, to_ps(parallel), together)
     end
 
@@ -98,18 +98,15 @@ module Tomoto
 
     private
 
-    def prepared?
-      global_step.positive?
-    end
-
     def prepare
-      unless prepared?
+      unless defined?(@prepared)
         _prepare(@min_cf, @min_df, @rm_top)
+        @prepared = true
       end
     end
 
     def prepare_doc(doc)
-      raise "cannot add_doc() after train()" unless prepared?
+      raise "cannot add_doc() after train()" if defined?(@prepared)
       tokenize_doc(doc)
     end
 

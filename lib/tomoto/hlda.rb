@@ -37,7 +37,7 @@ module Tomoto
 
     def check_topic(topic_id)
       raise "topic_id must be < K" if topic_id >= k
-      raise "train() should be called first" unless prepared?
+      raise "train() should be called first" unless @prepared
     end
 
     def topics_info(summary, topic_word_top_n:)
