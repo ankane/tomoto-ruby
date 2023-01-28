@@ -24,7 +24,7 @@ module Tomoto
 
     # TODO support multiple docs
     def infer(doc, iter: 100, tolerance: -1, workers: 0, parallel: :default, together: 0)
-      raise "cannot infer with untrained model" unless global_step.positive?
+      raise "cannot infer with untrained model" unless trained?
       _infer(doc, iter, tolerance, workers, to_ps(parallel), together)
     end
 
@@ -97,6 +97,10 @@ module Tomoto
     end
 
     private
+
+    def trained?
+      global_step.positive?
+    end
 
     def prepare
       unless defined?(@prepared)
