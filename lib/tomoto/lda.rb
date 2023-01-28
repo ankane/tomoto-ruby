@@ -86,6 +86,7 @@ module Tomoto
       end
     end
 
+    # TODO raise error if iterations < 1
     def train(iterations = 10, workers: 0, parallel: :default)
       prepare
       _train(iterations, workers, to_ps(parallel))
