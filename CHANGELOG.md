@@ -1,6 +1,7 @@
 ## 0.3.3 (unreleased)
 
 - Added `topic_label_dict` method to `LLDA`
+- Fixed error with `infer` with loaded model
 
 ## 0.3.2 (2023-01-22)
 
