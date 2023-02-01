@@ -18,9 +18,9 @@ Train a model
 
 ```ruby
 model = Tomoto::LDA.new(k: 2)
-model.add_doc("text from document one")
-model.add_doc("text from document two")
-model.add_doc("text from document three")
+model.add_doc(["tokens", "from", "document", "one"])
+model.add_doc(["tokens", "from", "document", "two"])
+model.add_doc(["tokens", "from", "document", "three"])
 model.train(100) # iterations
 ```
 
@@ -111,14 +111,6 @@ If a method or option you need isn’t supported, feel free to open an issue.
 
 - [LDA](examples/lda_basic.rb)
 - [HDP](examples/hdp_basic.rb)
-
-## Tokenization
-
-Documents are tokenized by whitespace by default, or you can perform your own tokenization.
-
-```ruby
-model.add_doc(["tokens", "from", "document", "one"])
-```
 
 ## Performance
 
