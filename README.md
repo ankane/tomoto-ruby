@@ -76,7 +76,7 @@ model.ll_per_word
 Perform inference for unseen documents
 
 ```ruby
-doc = model.make_doc("unseen doc")
+doc = model.make_doc(["unseen", "doc"])
 topic_dist, ll = model.infer(doc)
 ```
 
