@@ -1,5 +1,7 @@
 name: release
-on: workflow_dispatch
+on:
+  push:
+    branches: [next]
 jobs:
   release:
     strategy:
