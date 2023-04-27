@@ -118,7 +118,7 @@ class LDATest < Minitest::Test
     model = Tomoto::HDP.new
     model.save(tempfile)
 
-    error = assert_raises(RuntimeError) do
+    error = assert_raises(SystemCallError) do
       Tomoto::LDA.load(tempfile)
     end
     assert_match "matrix cols != 1", error.message

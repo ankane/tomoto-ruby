@@ -9,7 +9,7 @@ Rake::TestTask.new do |t|
 end
 
 ENV["RUBY_CC_VERSION"] = "3.2.0:3.1.0:3.0.0:2.7.0"
-ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.14"
+ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.15"
 
 platforms = [
   "x86_64-linux",
