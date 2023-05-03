@@ -1,3 +1,7 @@
+## 0.4.0 (unreleased)
+
+- Dropped support for Ruby < 3
+
 ## 0.3.3 (2023-02-01)
 
 - Added `topic_label_dict` method to `LLDA`
