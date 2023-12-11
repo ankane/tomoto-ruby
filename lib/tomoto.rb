@@ -6,20 +6,20 @@ rescue LoadError
 end
 
 # modules
-require "tomoto/ct"
-require "tomoto/dmr"
-require "tomoto/dt"
-require "tomoto/gdmr"
-require "tomoto/hdp"
-require "tomoto/hlda"
-require "tomoto/hpa"
-require "tomoto/lda"
-require "tomoto/llda"
-require "tomoto/mglda"
-require "tomoto/pa"
-require "tomoto/plda"
-require "tomoto/slda"
-require "tomoto/version"
+require_relative "tomoto/ct"
+require_relative "tomoto/dmr"
+require_relative "tomoto/dt"
+require_relative "tomoto/gdmr"
+require_relative "tomoto/hdp"
+require_relative "tomoto/hlda"
+require_relative "tomoto/hpa"
+require_relative "tomoto/lda"
+require_relative "tomoto/llda"
+require_relative "tomoto/mglda"
+require_relative "tomoto/pa"
+require_relative "tomoto/plda"
+require_relative "tomoto/slda"
+require_relative "tomoto/version"
 
 module Tomoto
   PARALLEL_SCHEME = [:default, :none, :copy_merge, :partition]
