@@ -1,6 +1,6 @@
 ## 0.4.0 (unreleased)
 
-- Updated tomoto to 0.12.6
+- Updated tomoto to 0.12.7
 - Dropped support for Ruby < 3
 
 ## 0.3.3 (2023-02-01)
