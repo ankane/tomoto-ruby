@@ -12,12 +12,12 @@ jobs:
           - platform: arm64-darwin
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2
+          ruby-version: 3.3
       - run: bundle install
       - run: bundle exec rake gem:${{ matrix.platform }}
       - uses: actions/upload-artifact@v3
