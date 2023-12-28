@@ -1,5 +1,6 @@
 ## 0.4.0 (2023-12-28)
 
+- Added support for Ruby 3.3
 - Added precompiled gem for Linux ARM
 - Updated tomoto to 0.12.7
 - Dropped support for Ruby < 3
