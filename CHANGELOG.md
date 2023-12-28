@@ -1,4 +1,4 @@
-## 0.4.0 (unreleased)
+## 0.4.0 (2023-12-28)
 
 - Added precompiled gem for Linux ARM
 - Updated tomoto to 0.12.7
