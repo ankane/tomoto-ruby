@@ -1,5 +1,6 @@
 ## 0.4.0 (unreleased)
 
+- Added precompiled gem for Linux ARM
 - Updated tomoto to 0.12.7
 - Dropped support for Ruby < 3
 
