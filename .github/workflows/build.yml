@@ -12,4 +12,5 @@ jobs:
           ruby-version: 3.3
           bundler-cache: true
       - run: MAKE="make -j$(nproc)" bundle exec rake compile
-      - run: bundle exec rake test
+      - run: sudo apt-get update && sudo apt-get install valgrind
+      - run: bundle exec rake test:valgrind
