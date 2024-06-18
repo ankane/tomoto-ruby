@@ -41,7 +41,7 @@ namespace :gem do
 
   platforms.each do |platform|
     desc "Build the native binary gems"
-    multitask :native => platform
+    multitask native: platform
 
     desc "Build the native binary gem for #{platform}"
     task platform => :prepare do
