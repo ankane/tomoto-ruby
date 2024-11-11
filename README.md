@@ -2,7 +2,7 @@
 
 :tomato: [tomoto](https://github.com/bab2min/tomotopy) - high performance topic modeling - for Ruby
 
-[![Build Status](https://github.com/ankane/tomoto-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/tomoto-ruby/actions)
+[![Build Status](https://github.com/ankane/tomoto-ruby/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/tomoto-ruby/actions)
 
 ## Installation
 
