@@ -8,8 +8,8 @@ Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
 end
 
-ENV["RUBY_CC_VERSION"] = "3.3.0:3.2.0:3.1.0:3.0.0"
-ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.15"
+ENV["RUBY_CC_VERSION"] = "3.4.0:3.3.0:3.2.0:3.1.0"
+ENV["MACOSX_DEPLOYMENT_TARGET"] = "11"
 
 platforms = [
   "x86_64-linux",
