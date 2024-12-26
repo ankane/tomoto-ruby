@@ -1,4 +1,4 @@
-## 0.5.1 (unreleased)
+## 0.5.1 (2024-12-26)
 
 - Fixed precompiled gem for Ruby 3.3
 
