@@ -1,3 +1,7 @@
+## 0.5.1 (unreleased)
+
+- Fixed precompiled gem for Ruby 3.3
+
 ## 0.5.0 (2024-12-26)
 
 - Added support for Ruby 3.4
