@@ -1,6 +1,7 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 require "rake/extensiontask"
+require "rake_compiler_dock"
 
 task default: :test
 Rake::TestTask.new do |t|
@@ -8,7 +9,7 @@ Rake::TestTask.new do |t|
   t.pattern = "test/**/*_test.rb"
 end
 
-ENV["RUBY_CC_VERSION"] = "3.4.0:3.3.5:3.2.0:3.1.0"
+RakeCompilerDock.set_ruby_cc_version("~> 3.1")
 ENV["MACOSX_DEPLOYMENT_TARGET"] = "11"
 
 platforms = [
