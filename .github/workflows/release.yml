@@ -20,8 +20,8 @@ jobs:
           ruby-version: 3.3
       - run: bundle install
       - run: bundle exec rake gem:${{ matrix.platform }}
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          name: native-gem
+          name: native-gem-${{ matrix.platform }}
           path: pkg/*.gem
           retention-days: 1
