@@ -15,8 +15,7 @@ void init_plda(Rice::Module& m);
 void init_slda(Rice::Module& m);
 
 extern "C"
-void Init_tomoto()
-{
+void Init_tomoto() {
   auto m = Rice::define_module("Tomoto")
     .define_singleton_function(
       "isa",

@@ -1,6 +1,10 @@
+#include <string>
+#include <vector>
+
 #include <GDMR.h>
 
 #include <rice/rice.hpp>
+#include <rice/stl.hpp>
 
 #include "utils.h"
 

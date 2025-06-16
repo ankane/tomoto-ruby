@@ -1,14 +1,16 @@
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include <LDA.h>
 
 #include <rice/rice.hpp>
+#include <rice/stl.hpp>
 
 #include "utils.h"
 
-class DocumentObject
-{
+class DocumentObject {
 public:
   DocumentObject(const tomoto::DocumentBase* _doc, const tomoto::ITopicModel* _tm) : doc{ _doc }, tm{ _tm } {}
 
@@ -210,7 +212,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "_tw",
       [](tomoto::ILDAModel& self) {
-        return (int)self.getTermWeight();
+        return static_cast<int>(self.getTermWeight());
       })
     .define_method(
       "used_vocab_df",
