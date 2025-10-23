@@ -3,11 +3,11 @@ require "rake/testtask"
 require "rake/extensiontask"
 require "rake_compiler_dock"
 
-task default: :test
 Rake::TestTask.new do |t|
-  t.libs << "test"
   t.pattern = "test/**/*_test.rb"
 end
+
+task default: :test
 
 RakeCompilerDock.set_ruby_cc_version("~> 3.1")
 ENV["MACOSX_DEPLOYMENT_TARGET"] = "11"
