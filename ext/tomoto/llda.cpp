@@ -43,7 +43,7 @@ void init_llda(Rice::Module& m) {
         for (size_t i = 0; i < dict.size(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
           Object obj(value);
-          res.push(obj.call("force_encoding", utf8));
+          res.push(obj.call("force_encoding", utf8), false);
         }
         return res;
       });

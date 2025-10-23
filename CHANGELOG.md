@@ -1,5 +1,6 @@
 ## 0.6.0 (unreleased)
 
+- Fixed error with Rice 4.7
 - Dropped support for Ruby < 3.2
 
 ## 0.5.1 (2024-12-26)

@@ -24,7 +24,7 @@ void init_hlda(Rice::Module& m) {
       [](tomoto::IHLDAModel& self) {
         Array res;
         for (size_t i = 0; i < self.getLevelDepth(); i++) {
-          res.push(self.getAlpha(i));
+          res.push(self.getAlpha(i), false);
         }
         return res;
       })

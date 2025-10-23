@@ -25,7 +25,7 @@ void init_hpa(Rice::Module& m) {
         Array res;
         // use <= to return k+1 elements
         for (size_t i = 0; i <= self.getK(); i++) {
-          res.push(self.getAlpha(i));
+          res.push(self.getAlpha(i), false);
         }
         return res;
       });

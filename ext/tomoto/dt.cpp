@@ -43,9 +43,9 @@ void init_dt(Rice::Module& m) {
         for (size_t i = 0; i < self.getK(); i++) {
           Array res2;
           for (size_t j = 0; j < self.getT(); j++) {
-            res2.push(self.getAlpha(i, j));
+            res2.push(self.getAlpha(i, j), false);
           }
-          res.push(res2);
+          res.push(res2, false);
         }
         return res;
       })

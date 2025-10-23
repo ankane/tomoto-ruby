@@ -65,12 +65,12 @@ void init_lda(Rice::Module& m) {
         auto topic_dist = self.getTopicsByDoc(doc);
         auto topic_res = Array();
         for (size_t i = 0; i < topic_dist.size(); i++) {
-          topic_res.push(topic_dist[i]);
+          topic_res.push(topic_dist[i], false);
         }
 
         auto res = Array();
-        res.push(topic_res);
-        res.push(ll);
+        res.push(topic_res, false);
+        res.push(ll, false);
         return res;
       })
     .define_method(
@@ -78,7 +78,7 @@ void init_lda(Rice::Module& m) {
       [](tomoto::ILDAModel& self) {
         Array res;
         for (size_t i = 0; i < self.getK(); i++) {
-          res.push(self.getAlpha(i));
+          res.push(self.getAlpha(i), false);
         }
         return res;
       })
@@ -98,7 +98,7 @@ void init_lda(Rice::Module& m) {
       [](tomoto::ILDAModel& self) {
         Array res;
         for (auto const& v : self.getCountByTopic()) {
-          res.push(v);
+          res.push(v, false);
         }
         return res;
       })
@@ -109,7 +109,7 @@ void init_lda(Rice::Module& m) {
         auto n = self.getNumDocs();
         for (size_t i = 0; i < n; i++) {
           auto v = DocumentObject(self.getDoc(i), &self);
-          res.push(Object(Rice::detail::To_Ruby<DocumentObject>().convert(v)));
+          res.push(Object(Rice::detail::To_Ruby<DocumentObject>().convert(v)), false);
         }
         return res;
       })
@@ -184,7 +184,7 @@ void init_lda(Rice::Module& m) {
         auto dict = self.getVocabDict();
         size_t size = dict.size();
         for (size_t i = rmTop; i > 0; i--) {
-          res.push(dict.toWord(size - i));
+          res.push(dict.toWord(size - i), false);
         }
         return res;
       })
@@ -220,7 +220,7 @@ void init_lda(Rice::Module& m) {
         auto vocab = self.getVocabDf();
         Array res;
         for (size_t i = 0; i < self.getV(); i++) {
-          res.push(vocab[i]);
+          res.push(vocab[i], false);
         }
         return res;
       })
@@ -230,7 +230,7 @@ void init_lda(Rice::Module& m) {
         auto vocab = self.getVocabCf();
         Array res;
         for (size_t i = 0; i < self.getV(); i++) {
-          res.push(vocab[i]);
+          res.push(vocab[i], false);
         }
         return res;
       })
@@ -243,7 +243,7 @@ void init_lda(Rice::Module& m) {
         for (size_t i = 0; i < self.getV(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
           Object obj(value);
-          res.push(obj.call("force_encoding", utf8));
+          res.push(obj.call("force_encoding", utf8), false);
         }
         return res;
       })
@@ -253,7 +253,7 @@ void init_lda(Rice::Module& m) {
         auto vocab = self.getVocabDf();
         Array res;
         for (size_t i = 0; i < vocab.size(); i++) {
-          res.push(vocab[i]);
+          res.push(vocab[i], false);
         }
         return res;
       })
@@ -263,7 +263,7 @@ void init_lda(Rice::Module& m) {
         auto vocab = self.getVocabCf();
         Array res;
         for (size_t i = 0; i < vocab.size(); i++) {
-          res.push(vocab[i]);
+          res.push(vocab[i], false);
         }
         return res;
       })
@@ -276,7 +276,7 @@ void init_lda(Rice::Module& m) {
         for (size_t i = 0; i < dict.size(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
           Object obj(value);
-          res.push(obj.call("force_encoding", utf8));
+          res.push(obj.call("force_encoding", utf8), false);
         }
         return res;
       });
