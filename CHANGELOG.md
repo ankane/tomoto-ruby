@@ -1,4 +1,4 @@
-## 0.6.0 (unreleased)
+## 0.6.0 (2025-10-26)
 
 - Fixed error with Rice 4.7
 - Dropped support for Ruby < 3.2
