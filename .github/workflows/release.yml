@@ -17,10 +17,10 @@ jobs:
           submodules: true
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3
+          ruby-version: 3.4
       - run: bundle install
       - run: bundle exec rake gem:${{ matrix.platform }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: native-gem-${{ matrix.platform }}
           path: pkg/*.gem
