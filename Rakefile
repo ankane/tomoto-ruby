@@ -9,7 +9,7 @@ end
 
 task default: :test
 
-RakeCompilerDock.set_ruby_cc_version("~> 3.2")
+RakeCompilerDock.set_ruby_cc_version(">= 3.2")
 ENV["MACOSX_DEPLOYMENT_TARGET"] = "11"
 
 platforms = [
