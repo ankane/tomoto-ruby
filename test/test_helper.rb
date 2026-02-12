@@ -22,4 +22,8 @@ class Minitest::Test
   def tempfile
     @tempfile ||= "#{Dir.mktmpdir}/#{Time.now.to_f}"
   end
+
+  def valgrind?
+    ENV["RUBY_MEMCHECK_RUNNING"]
+  end
 end
