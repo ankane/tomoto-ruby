@@ -28,9 +28,6 @@ class LDATest < Minitest::Test
     model.save(tempfile)
     model = Tomoto::LDA.load(tempfile)
     assert_equal 2, model.num_vocabs
-
-    skip "TODO fix" if valgrind?
-
     assert model.summary
   end
 

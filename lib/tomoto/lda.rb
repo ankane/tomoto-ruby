@@ -11,6 +11,7 @@ module Tomoto
     def self.load(filename)
       model = new
       model._load(filename)
+      model.instance_variable_set(:@prepared, true)
       model
     end
 
