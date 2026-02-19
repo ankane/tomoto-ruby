@@ -1,3 +1,7 @@
+## 0.6.2 (unreleased)
+
+- Fixed memory leak with `make_doc` method
+
 ## 0.6.1 (2026-01-01)
 
 - Added support for Ruby 4.0

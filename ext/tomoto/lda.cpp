@@ -12,10 +12,36 @@
 
 class DocumentObject {
 public:
-  DocumentObject(const tomoto::DocumentBase* _doc, const tomoto::ITopicModel* _tm) : doc{ _doc }, tm{ _tm } {}
+  DocumentObject(const tomoto::DocumentBase* _doc, const tomoto::ITopicModel* _tm, bool _owner = false) : doc{ _doc }, tm{ _tm }, owner{ _owner } {}
+
+  ~DocumentObject() {
+    if (owner && doc) {
+      delete doc;
+      doc = NULL;
+    }
+  }
+
+  // prevent copy
+  DocumentObject(const DocumentObject&) = delete;
+  DocumentObject& operator=(const DocumentObject&) = delete;
+
+  DocumentObject(DocumentObject&& other) noexcept {
+    *this = std::move(other);
+  }
+
+  DocumentObject& operator=(DocumentObject&& other) noexcept {
+    if (this != &other) {
+      doc = other.doc;
+      tm = other.tm;
+      owner = other.owner;
+      other.owner = false;
+    }
+    return *this;
+  }
 
   const tomoto::DocumentBase* doc;
   const tomoto::ITopicModel* tm;
+  bool owner;
 };
 
 void init_lda(Rice::Module& m) {
@@ -52,7 +78,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "_make_doc",
       [](tomoto::ILDAModel& self, std::vector<std::string> words) {
-        return DocumentObject(self.makeDoc(buildDoc(words)).release(), &self);
+        return DocumentObject(self.makeDoc(buildDoc(words)).release(), &self, true);
       })
     .define_method(
       "_infer",

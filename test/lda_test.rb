@@ -69,8 +69,6 @@ class LDATest < Minitest::Test
     model.add_doc(["a", "new", "document"])
     model.train(100)
 
-    skip "TODO fix make_doc" if valgrind?
-
     doc = model.make_doc(["unseen", "document"])
     topic_dist, ll = model.infer(doc)
     assert_elements_in_delta [0.47528052, 0.52471954], topic_dist
@@ -90,8 +88,6 @@ class LDATest < Minitest::Test
 
     assert_equal steps, model.global_step
 
-    skip "TODO fix make_doc" if valgrind?
-
     doc = model.make_doc(["unseen", "document"])
     topic_dist, ll = model.infer(doc)
     assert_elements_in_delta [0.47528052, 0.52471954], topic_dist
@@ -106,8 +102,6 @@ class LDATest < Minitest::Test
 
     model.save(tempfile)
     model = Tomoto::LDA.load(tempfile)
-
-    skip "TODO fix make_doc" if valgrind?
 
     doc = model.make_doc(["unseen", "document"])
     error = assert_raises(RuntimeError) do
