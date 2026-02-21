@@ -20,7 +20,10 @@ apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 
 if apple_clang
   # silence tomoto warnings
-  $CXXFLAGS += " -Wno-inconsistent-missing-override"
+  $CXXFLAGS += " -Wno-switch -Wno-unqualified-std-cast-call -Wno-inconsistent-missing-override"
+else
+  # silence eigen warnings
+  $CXXFLAGS += " -Wno-ignored-attributes"
 end
 
 ext = File.expand_path(".", __dir__)
