@@ -19,15 +19,9 @@ end
 apple_clang = RbConfig::CONFIG["CC_VERSION_MESSAGE"] =~ /apple clang/i
 
 if apple_clang
-  # silence rice warnings
-  $CXXFLAGS += " -Wno-deprecated-declarations"
-else
-  # silence eigen warnings
-  $CXXFLAGS += " -Wno-ignored-attributes -Wno-deprecated-copy"
+  # silence tomoto warnings
+  $CXXFLAGS += " -Wno-inconsistent-missing-override"
 end
-
-# silence tomoto warnings
-$CXXFLAGS += " -Wno-unused-variable -Wno-switch -Wno-unqualified-std-cast-call"
 
 ext = File.expand_path(".", __dir__)
 tomoto = File.expand_path("../../vendor/tomotopy/src/TopicModel", __dir__)
