@@ -68,7 +68,7 @@ void init_lda(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::ILDAModel::create((tomoto::TermWeight)tw, args);
+        return tomoto::ILDAModel::create((tomoto::TermWeight)tw, args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",

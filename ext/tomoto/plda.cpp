@@ -20,7 +20,7 @@ void init_plda(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::IPLDAModel::create((tomoto::TermWeight)tw, args);
+        return tomoto::IPLDAModel::create((tomoto::TermWeight)tw, args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",

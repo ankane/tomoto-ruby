@@ -17,7 +17,7 @@ void init_hlda(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, args);
+        return tomoto::IHLDAModel::create((tomoto::TermWeight)tw, args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "alpha",

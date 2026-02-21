@@ -17,7 +17,7 @@ void init_hdp(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::IHDPModel::create((tomoto::TermWeight)tw, args);
+        return tomoto::IHDPModel::create((tomoto::TermWeight)tw, args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "alpha",

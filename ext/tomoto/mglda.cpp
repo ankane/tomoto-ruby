@@ -23,7 +23,7 @@ void init_mglda(Rice::Module& m) {
         args.alphaML = alpha_ml;
         args.eta = eta_g;
         // TODO more args
-        return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, args);
+        return tomoto::IMGLDAModel::create((tomoto::TermWeight)tw, args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
