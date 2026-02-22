@@ -1,4 +1,4 @@
-## 0.6.2 (unreleased)
+## 0.6.2 (2026-02-21)
 
 - Updated tomoto to 0.14.0
 - Fixed memory leak with `make_doc` method
