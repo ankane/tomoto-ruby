@@ -18,7 +18,7 @@ namespace Rice::detail {
     explicit To_Ruby(Arg* arg) : arg_(arg) { }
 
     VALUE convert(const std::vector<T>& x) {
-      auto a = rb_ary_new2(x.size());
+      auto a = detail::protect(rb_ary_new2, x.size());
       for (const auto& v : x) {
         detail::protect(rb_ary_push, a, To_Ruby<T>().convert(v));
       }
