@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <Dictionary.h>
+#include <LDA.h>
 #include <LLDA.h>
 #include <PLDA.h>
 #include <TopicModel.hpp>

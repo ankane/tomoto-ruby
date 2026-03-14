@@ -2,6 +2,7 @@
 
 #include <Dictionary.h>
 #include <HPA.h>
+#include <LDA.h>
 #include <PA.h>
 
 #include <rice/rice.hpp>

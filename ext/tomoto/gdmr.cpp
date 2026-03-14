@@ -6,6 +6,7 @@
 #include <Dictionary.h>
 #include <DMR.h>
 #include <GDMR.h>
+#include <LDA.h>
 #include <TopicModel.hpp>
 
 #include <rice/rice.hpp>
