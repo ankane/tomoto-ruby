@@ -87,7 +87,7 @@ void init_lda(Rice::Module& m) {
         std::vector<tomoto::DocumentBase*> docs;
         const auto& doc = doc_object.doc;
         docs.emplace_back(const_cast<tomoto::DocumentBase*>(doc));
-        float ll = self.infer(docs, iteration, tolerance, workers, static_cast<tomoto::ParallelScheme>(ps), !!together)[0];
+        double ll = self.infer(docs, iteration, tolerance, workers, static_cast<tomoto::ParallelScheme>(ps), !!together).at(0);
 
         auto topic_dist = self.getTopicsByDoc(doc);
         Rice::Array topic_res;
@@ -299,11 +299,10 @@ void init_lda(Rice::Module& m) {
       [](tomoto::ILDAModel& self) {
         const auto& dict = self.getVocabDict();
         Rice::Array res;
-        auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
+        Rice::Object utf8 = Rice::Object(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          Rice::Object obj(value);
-          res.push(obj.call("force_encoding", utf8), false);
+          res.push(Rice::Object(value).call("force_encoding", utf8), false);
         }
         return res;
       });
