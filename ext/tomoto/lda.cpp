@@ -57,7 +57,7 @@ void init_lda(Rice::Module& m) {
         Rice::Hash res;
         auto topics = self.tm->getTopicsByDoc(self.doc);
         for (size_t i = 0; i < topics.size(); i++) {
-          res[i] = topics[i];
+          res[i] = topics.at(i);
         }
         return res;
       });

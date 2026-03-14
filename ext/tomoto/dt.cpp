@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-#include <Dictionary.h>
 #include <DT.h>
+#include <Dictionary.h>
 #include <LDA.h>
 #include <TopicModel.hpp>
 
