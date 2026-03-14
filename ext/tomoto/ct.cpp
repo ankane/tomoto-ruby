@@ -16,7 +16,7 @@ void init_ct(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::ICTModel::create((tomoto::TermWeight)tw, args).release();
+        return tomoto::ICTModel::create(static_cast<tomoto::TermWeight>(tw), args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_correlations",

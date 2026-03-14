@@ -29,7 +29,7 @@ void init_slda(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::ISLDAModel::create((tomoto::TermWeight)tw, args).release();
+        return tomoto::ISLDAModel::create(static_cast<tomoto::TermWeight>(tw), args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",

@@ -20,15 +20,15 @@ void Init_tomoto() {
     .define_singleton_function(
       "isa",
       []() {
-        #ifdef __AVX2__
-          return Rice::String("avx2");
-        #elif defined(__AVX__)
-          return Rice::String("avx");
-        #elif defined(__SSE2__) || defined(__x86_64__) || defined(_WIN64)
-          return Rice::String("sse2");
-        #else
-          return Rice::String("none");
-        #endif
+#ifdef __AVX2__
+        return Rice::String("avx2");
+#elif defined(__AVX__)
+        return Rice::String("avx");
+#elif defined(__SSE2__) || defined(__x86_64__) || defined(_WIN64)
+        return Rice::String("sse2");
+#else
+        return Rice::String("none");
+#endif
       });
 
   init_lda(m);

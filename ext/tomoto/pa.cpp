@@ -17,7 +17,7 @@ void init_pa(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::IPAModel::create((tomoto::TermWeight)tw, args).release();
+        return tomoto::IPAModel::create(static_cast<tomoto::TermWeight>(tw), args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "k1",

@@ -20,7 +20,7 @@ void init_llda(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::ILLDAModel::create((tomoto::TermWeight)tw, args).release();
+        return tomoto::ILLDAModel::create(static_cast<tomoto::TermWeight>(tw), args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",

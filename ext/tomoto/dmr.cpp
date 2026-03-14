@@ -22,7 +22,7 @@ void init_dmr(Rice::Module& m) {
         if (seed >= 0) {
           args.seed = seed;
         }
-        return tomoto::IDMRModel::create((tomoto::TermWeight)tw, args).release();
+        return tomoto::IDMRModel::create(static_cast<tomoto::TermWeight>(tw), args).release();
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
