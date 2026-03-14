@@ -1,6 +1,7 @@
 #include <cstddef>
 
 #include <CT.h>
+#include <Dictionary.h>
 #include <LDA.h>
 
 #include <rice/rice.hpp>

@@ -1,9 +1,12 @@
 #include <cstddef>
+#include <cstdint>
 #include <string>
 #include <vector>
 
+#include <Dictionary.h>
 #include <DT.h>
 #include <LDA.h>
+#include <TopicModel.hpp>
 
 #include <rice/rice.hpp>
 #include <rice/stl.hpp>

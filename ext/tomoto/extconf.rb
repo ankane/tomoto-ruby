@@ -33,7 +33,7 @@ eigen = File.expand_path("../../vendor/eigen", __dir__)
 eigen_rand = File.expand_path("../../vendor/EigenRand", __dir__)
 
 $srcs = Dir["{#{ext},#{tomoto},#{tomoto_utils}}/*.cpp"]
-$INCFLAGS += " -I#{tomoto} -I#{eigen} -I#{eigen_rand}"
+$INCFLAGS += " -I#{tomoto} -I#{tomoto_utils} -I#{eigen} -I#{eigen_rand}"
 $VPATH << tomoto
 $VPATH << tomoto_utils
 

@@ -1,5 +1,6 @@
 #include <cstddef>
 
+#include <Dictionary.h>
 #include <HLDA.h>
 #include <LDA.h>
 

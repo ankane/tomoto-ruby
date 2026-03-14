@@ -1,11 +1,14 @@
 #include <cstddef>
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <utility>
 #include <vector>
 
+#include <Dictionary.h>
 #include <LDA.h>
+#include <TopicModel.hpp>
 
 #include <rice/rice.hpp>
 #include <rice/stl.hpp>

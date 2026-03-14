@@ -2,7 +2,9 @@
 #include <string>
 #include <vector>
 
+#include <Dictionary.h>
 #include <DMR.h>
+#include <TopicModel.hpp>
 #include <LDA.h>
 
 #include <rice/rice.hpp>
