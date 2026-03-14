@@ -73,12 +73,12 @@ void init_lda(Rice::Module& m) {
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
-      [](tomoto::ILDAModel& self, std::vector<std::string> words) {
+      [](tomoto::ILDAModel& self, const std::vector<std::string>& words) {
         return self.addDoc(buildDoc(words));
       })
     .define_method(
       "_make_doc",
-      [](tomoto::ILDAModel& self, std::vector<std::string> words) {
+      [](tomoto::ILDAModel& self, const std::vector<std::string>& words) {
         return DocumentObject(self.makeDoc(buildDoc(words)).release(), &self, true);
       })
     .define_method(
@@ -87,7 +87,7 @@ void init_lda(Rice::Module& m) {
         std::vector<tomoto::DocumentBase*> docs;
         const auto& doc = doc_object.doc;
         docs.emplace_back(const_cast<tomoto::DocumentBase*>(doc));
-        float ll = self.infer(docs, iteration, tolerance, workers, (tomoto::ParallelScheme)ps, !!together)[0];
+        float ll = self.infer(docs, iteration, tolerance, workers, static_cast<tomoto::ParallelScheme>(ps), !!together)[0];
 
         auto topic_dist = self.getTopicsByDoc(doc);
         Rice::Array topic_res;
@@ -236,7 +236,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "_train",
       [](tomoto::ILDAModel& self, size_t iteration, size_t workers, size_t ps) {
-        self.train(iteration, workers, (tomoto::ParallelScheme)ps);
+        self.train(iteration, workers, static_cast<tomoto::ParallelScheme>(ps));
       })
     .define_method(
       "_tw",

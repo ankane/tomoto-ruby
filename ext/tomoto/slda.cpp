@@ -33,7 +33,7 @@ void init_slda(Rice::Module& m) {
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
-      [](tomoto::ISLDAModel& self, std::vector<std::string> words, std::vector<tomoto::Float> y) {
+      [](tomoto::ISLDAModel& self, const std::vector<std::string>& words, const std::vector<tomoto::Float>& y) {
         auto doc = buildDoc(words);
         doc.misc["y"] = y;
         return self.addDoc(doc);
@@ -46,7 +46,9 @@ void init_slda(Rice::Module& m) {
     .define_method(
       "_var_type",
       [](tomoto::ISLDAModel& self, size_t var_id) {
-        if (var_id >= self.getF()) throw std::runtime_error{ "'var_id' must be < 'f'" };
+        if (var_id >= self.getF()) {
+          throw std::runtime_error{"'var_id' must be < 'f'"};
+        }
         return self.getTypeOfVar(var_id) == tomoto::ISLDAModel::GLM::linear ? "l" : "b";
       });
 }
