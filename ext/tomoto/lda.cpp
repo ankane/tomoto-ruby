@@ -133,9 +133,9 @@ void init_lda(Rice::Module& m) {
       "docs",
       [](tomoto::ILDAModel& self) {
         Rice::Array res;
-        auto n = self.getNumDocs();
+        size_t n = self.getNumDocs();
         for (size_t i = 0; i < n; i++) {
-          auto v = DocumentObject(self.getDoc(i), &self);
+          DocumentObject v(self.getDoc(i), &self);
           res.push(Rice::Object(Rice::detail::To_Ruby<DocumentObject>().convert(v)), false);
         }
         return res;
@@ -268,11 +268,10 @@ void init_lda(Rice::Module& m) {
       [](tomoto::ILDAModel& self) {
         const auto& dict = self.getVocabDict();
         Rice::Array res;
-        auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
+        Rice::Object utf8 = Rice::Object(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < self.getV(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          Rice::Object obj(value);
-          res.push(obj.call("force_encoding", utf8), false);
+          res.push(Rice::Object(value).call("force_encoding", utf8), false);
         }
         return res;
       })

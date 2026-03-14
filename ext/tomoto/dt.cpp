@@ -32,7 +32,7 @@ void init_dt(Rice::Module& m) {
     .define_method(
       "_add_doc",
       [](tomoto::IDTModel& self, const std::vector<std::string>& words, uint32_t timepoint) {
-        auto doc = buildDoc(words);
+        tomoto::RawDoc doc = buildDoc(words);
         doc.misc["timepoint"] = timepoint;
         return self.addDoc(doc);
       })

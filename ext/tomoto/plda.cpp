@@ -25,7 +25,7 @@ void init_plda(Rice::Module& m) {
     .define_method(
       "_add_doc",
       [](tomoto::IPLDAModel& self, const std::vector<std::string>& words, const std::vector<std::string>& labels) {
-        auto doc = buildDoc(words);
+        tomoto::RawDoc doc = buildDoc(words);
         doc.misc["labels"] = labels;
         return self.addDoc(doc);
       })

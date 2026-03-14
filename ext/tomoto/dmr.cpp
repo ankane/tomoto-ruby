@@ -27,7 +27,7 @@ void init_dmr(Rice::Module& m) {
     .define_method(
       "_add_doc",
       [](tomoto::IDMRModel& self, const std::vector<std::string>& words, const std::string& metadata) {
-        auto doc = buildDoc(words);
+        tomoto::RawDoc doc = buildDoc(words);
         doc.misc["metadata"] = metadata;
         return self.addDoc(doc);
       })
