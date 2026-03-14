@@ -6,9 +6,6 @@
 #include <rice/rice.hpp>
 #include <rice/stl.hpp>
 
-using Rice::Array;
-using Rice::Object;
-
 namespace Rice::detail {
   template<typename T>
   class To_Ruby<std::vector<T>> {
@@ -18,7 +15,7 @@ namespace Rice::detail {
     explicit To_Ruby(Arg* arg) : arg_(arg) { }
 
     VALUE convert(const std::vector<T>& x) {
-      auto a = detail::protect(rb_ary_new2, x.size());
+      VALUE a = detail::protect(rb_ary_new2, x.size());
       for (const auto& v : x) {
         detail::protect(rb_ary_push, a, To_Ruby<T>().convert(v));
       }
@@ -30,7 +27,7 @@ namespace Rice::detail {
   };
 } // namespace Rice::detail
 
-inline tomoto::RawDoc buildDoc(std::vector<std::string>& words) {
+inline tomoto::RawDoc buildDoc(const std::vector<std::string>& words) {
   tomoto::RawDoc doc;
   doc.rawWords = words;
   return doc;

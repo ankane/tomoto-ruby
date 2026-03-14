@@ -22,7 +22,7 @@ void init_hlda(Rice::Module& m) {
     .define_method(
       "alpha",
       [](tomoto::IHLDAModel& self) {
-        Array res;
+        Rice::Array res;
         for (size_t i = 0; i < self.getLevelDepth(); i++) {
           res.push(self.getAlpha(i), false);
         }

@@ -90,12 +90,12 @@ void init_lda(Rice::Module& m) {
         float ll = self.infer(docs, iteration, tolerance, workers, (tomoto::ParallelScheme)ps, !!together)[0];
 
         auto topic_dist = self.getTopicsByDoc(doc);
-        Array topic_res;
+        Rice::Array topic_res;
         for (const auto& v : topic_dist) {
           topic_res.push(v, false);
         }
 
-        Array res;
+        Rice::Array res;
         res.push(topic_res, false);
         res.push(ll, false);
         return res;
@@ -103,7 +103,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "alpha",
       [](tomoto::ILDAModel& self) {
-        Array res;
+        Rice::Array res;
         for (size_t i = 0; i < self.getK(); i++) {
           res.push(self.getAlpha(i), false);
         }
@@ -123,7 +123,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "_count_by_topics",
       [](tomoto::ILDAModel& self) {
-        Array res;
+        Rice::Array res;
         for (auto const& v : self.getCountByTopic()) {
           res.push(v, false);
         }
@@ -132,11 +132,11 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "docs",
       [](tomoto::ILDAModel& self) {
-        Array res;
+        Rice::Array res;
         auto n = self.getNumDocs();
         for (size_t i = 0; i < n; i++) {
           auto v = DocumentObject(self.getDoc(i), &self);
-          res.push(Object(Rice::detail::To_Ruby<DocumentObject>().convert(v)), false);
+          res.push(Rice::Object(Rice::detail::To_Ruby<DocumentObject>().convert(v)), false);
         }
         return res;
       })
@@ -209,7 +209,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "_removed_top_words",
       [](tomoto::ILDAModel& self, size_t rmTop) {
-        Array res;
+        Rice::Array res;
         const auto& dict = self.getVocabDict();
         size_t size = dict.size();
         for (size_t i = rmTop; i > 0; i--) {
@@ -247,7 +247,7 @@ void init_lda(Rice::Module& m) {
       "used_vocab_df",
       [](tomoto::ILDAModel& self) {
         const auto& vocab = self.getVocabDf();
-        Array res;
+        Rice::Array res;
         for (size_t i = 0; i < self.getV(); i++) {
           res.push(vocab.at(i), false);
         }
@@ -257,7 +257,7 @@ void init_lda(Rice::Module& m) {
       "used_vocab_freq",
       [](tomoto::ILDAModel& self) {
         const auto& vocab = self.getVocabCf();
-        Array res;
+        Rice::Array res;
         for (size_t i = 0; i < self.getV(); i++) {
           res.push(vocab.at(i), false);
         }
@@ -267,11 +267,11 @@ void init_lda(Rice::Module& m) {
       "used_vocabs",
       [](tomoto::ILDAModel& self) {
         const auto& dict = self.getVocabDict();
-        Array res;
+        Rice::Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < self.getV(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          Object obj(value);
+          Rice::Object obj(value);
           res.push(obj.call("force_encoding", utf8), false);
         }
         return res;
@@ -279,7 +279,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "vocab_df",
       [](tomoto::ILDAModel& self) {
-        Array res;
+        Rice::Array res;
         for (const auto& v : self.getVocabDf()) {
           res.push(v, false);
         }
@@ -288,7 +288,7 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "vocab_freq",
       [](tomoto::ILDAModel& self) {
-        Array res;
+        Rice::Array res;
         for (const auto& v : self.getVocabCf()) {
           res.push(v, false);
         }
@@ -298,11 +298,11 @@ void init_lda(Rice::Module& m) {
       "vocabs",
       [](tomoto::ILDAModel& self) {
         const auto& dict = self.getVocabDict();
-        Array res;
+        Rice::Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          Object obj(value);
+          Rice::Object obj(value);
           res.push(obj.call("force_encoding", utf8), false);
         }
         return res;

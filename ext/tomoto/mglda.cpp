@@ -27,7 +27,7 @@ void init_mglda(Rice::Module& m) {
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
-      [](tomoto::IMGLDAModel& self, std::vector<std::string> words, std::string delimiter) {
+      [](tomoto::IMGLDAModel& self, const std::vector<std::string>& words, const std::string& delimiter) {
         auto doc = buildDoc(words);
         doc.misc["delimiter"] = delimiter;
         return self.addDoc(doc);

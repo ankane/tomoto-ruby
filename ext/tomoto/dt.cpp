@@ -39,9 +39,9 @@ void init_dt(Rice::Module& m) {
     .define_method(
       "alpha",
       [](tomoto::IDTModel& self) {
-        Array res;
+        Rice::Array res;
         for (size_t i = 0; i < self.getK(); i++) {
-          Array res2;
+          Rice::Array res2;
           for (size_t j = 0; j < self.getT(); j++) {
             res2.push(self.getAlpha(i, j), false);
           }

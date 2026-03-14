@@ -22,7 +22,7 @@ void init_hpa(Rice::Module& m) {
     .define_method(
       "alpha",
       [](tomoto::IHPAModel& self) {
-        Array res;
+        Rice::Array res;
         // use <= to return k+1 elements
         for (size_t i = 0; i <= self.getK(); i++) {
           res.push(self.getAlpha(i), false);

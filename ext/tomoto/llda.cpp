@@ -24,7 +24,7 @@ void init_llda(Rice::Module& m) {
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
-      [](tomoto::ILLDAModel& self, std::vector<std::string> words, std::vector<std::string> labels) {
+      [](tomoto::ILLDAModel& self, const std::vector<std::string>& words, const std::vector<std::string>& labels) {
         auto doc = buildDoc(words);
         doc.misc["labels"] = labels;
         return self.addDoc(doc);
@@ -37,12 +37,12 @@ void init_llda(Rice::Module& m) {
     .define_method(
       "topic_label_dict",
       [](tomoto::ILLDAModel& self) {
-        auto dict = self.getTopicLabelDict();
-        Array res;
+        const auto& dict = self.getTopicLabelDict();
+        Rice::Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          Object obj(value);
+          Rice::Object obj(value);
           res.push(obj.call("force_encoding", utf8), false);
         }
         return res;

@@ -56,11 +56,11 @@ void init_dmr(Rice::Module& m) {
       "metadata_dict",
       [](tomoto::IDMRModel& self) {
         const auto& dict = self.getMetadataDict();
-        Array res;
+        Rice::Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {
           VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          Object obj(value);
+          Rice::Object obj(value);
           res.push(obj.call("force_encoding", utf8), false);
         }
         return res;
