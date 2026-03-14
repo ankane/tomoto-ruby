@@ -12,10 +12,10 @@ void init_gdmr(Rice::Module& m) {
   Rice::define_class_under<tomoto::IGDMRModel, tomoto::IDMRModel>(m, "GDMR")
     .define_singleton_function(
       "_new",
-      [](size_t tw, size_t k, std::vector<uint64_t> degrees, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float sigma0, tomoto::Float eta, tomoto::Float alpha_epsilon, size_t seed) {
+      [](size_t tw, size_t k, const std::vector<uint64_t>& degrees, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float sigma0, tomoto::Float eta, tomoto::Float alpha_epsilon, size_t seed) {
         tomoto::GDMRArgs args;
         args.k = k;
-        args.degrees = std::move(degrees);
+        args.degrees = degrees;
         args.alpha = {alpha};
         args.sigma = sigma;
         args.sigma0 = sigma0;

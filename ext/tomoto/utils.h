@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include <TopicModel.hpp>
+
 #include <rice/rice.hpp>
 #include <rice/stl.hpp>
 

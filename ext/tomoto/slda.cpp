@@ -12,10 +12,10 @@ void init_slda(Rice::Module& m) {
   Rice::define_class_under<tomoto::ISLDAModel, tomoto::ILDAModel>(m, "SLDA")
     .define_singleton_function(
       "_new",
-      [](size_t tw, size_t k, Rice::Array rb_vars, tomoto::Float alpha, tomoto::Float eta, std::vector<tomoto::Float> mu, std::vector<tomoto::Float> nu_sq, std::vector<tomoto::Float> glm_param, size_t seed) {
+      [](size_t tw, size_t k, Rice::Array rb_vars, tomoto::Float alpha, tomoto::Float eta, const std::vector<tomoto::Float>& mu, const std::vector<tomoto::Float>& nu_sq, const std::vector<tomoto::Float>& glm_param, size_t seed) {
         std::vector<tomoto::ISLDAModel::GLM> vars;
         vars.reserve(rb_vars.size());
-        for (auto const& v : rb_vars) {
+        for (const auto& v : rb_vars) {
           vars.push_back(static_cast<tomoto::ISLDAModel::GLM>(Rice::detail::From_Ruby<int>().convert(v.value())));
         }
         tomoto::SLDAArgs args;

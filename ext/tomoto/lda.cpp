@@ -124,7 +124,7 @@ void init_lda(Rice::Module& m) {
       "_count_by_topics",
       [](tomoto::ILDAModel& self) {
         Rice::Array res;
-        for (auto const& v : self.getCountByTopic()) {
+        for (const auto& v : self.getCountByTopic()) {
           res.push(v, false);
         }
         return res;
