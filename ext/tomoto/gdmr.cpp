@@ -1,6 +1,8 @@
+#include <cstddef>
 #include <string>
 #include <vector>
 
+#include <DMR.h>
 #include <GDMR.h>
 
 #include <rice/rice.hpp>

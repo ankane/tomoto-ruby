@@ -1,6 +1,8 @@
+#include <cstddef>
 #include <string>
 #include <vector>
 
+#include <LDA.h>
 #include <SLDA.h>
 
 #include <rice/rice.hpp>

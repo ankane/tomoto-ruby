@@ -1,4 +1,7 @@
+#include <cstddef>
+
 #include <HDP.h>
+#include <LDA.h>
 
 #include <rice/rice.hpp>
 

@@ -1,3 +1,6 @@
+#include <cstddef>
+
+#include <LDA.h>
 #include <PA.h>
 
 #include <rice/rice.hpp>
