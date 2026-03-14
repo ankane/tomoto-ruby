@@ -16,7 +16,7 @@ void init_slda(Rice::Module& m) {
         std::vector<tomoto::ISLDAModel::GLM> vars;
         vars.reserve(rb_vars.size());
         for (auto const& v : rb_vars) {
-          vars.push_back((tomoto::ISLDAModel::GLM) Rice::detail::From_Ruby<int>().convert(v.value()));
+          vars.push_back(static_cast<tomoto::ISLDAModel::GLM>(Rice::detail::From_Ruby<int>().convert(v.value())));
         }
         tomoto::SLDAArgs args;
         args.k = k;

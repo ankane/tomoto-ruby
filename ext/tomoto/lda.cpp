@@ -16,9 +16,9 @@ public:
   DocumentObject(const tomoto::DocumentBase* _doc, const tomoto::ITopicModel* _tm, bool _owner = false) : doc{ _doc }, tm{ _tm }, owner{ _owner } {}
 
   ~DocumentObject() {
-    if (owner && doc) {
+    if (owner && doc != nullptr) {
       delete doc;
-      doc = NULL;
+      doc = nullptr;
     }
   }
 
@@ -85,17 +85,17 @@ void init_lda(Rice::Module& m) {
       "_infer",
       [](tomoto::ILDAModel& self, DocumentObject& doc_object, size_t iteration, float tolerance, size_t workers, size_t ps, size_t together) {
         std::vector<tomoto::DocumentBase*> docs;
-        auto doc = doc_object.doc;
+        const auto& doc = doc_object.doc;
         docs.emplace_back(const_cast<tomoto::DocumentBase*>(doc));
         float ll = self.infer(docs, iteration, tolerance, workers, (tomoto::ParallelScheme)ps, !!together)[0];
 
         auto topic_dist = self.getTopicsByDoc(doc);
-        auto topic_res = Array();
-        for (size_t i = 0; i < topic_dist.size(); i++) {
-          topic_res.push(topic_dist[i], false);
+        Array topic_res;
+        for (const auto& v : topic_dist) {
+          topic_res.push(v, false);
         }
 
-        auto res = Array();
+        Array res;
         res.push(topic_res, false);
         res.push(ll, false);
         return res;
@@ -158,8 +158,10 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "_load",
       [](tomoto::ILDAModel& self, const char* filename) {
-        std::ifstream str{ filename, std::ios_base::binary };
-        if (!str) throw std::runtime_error{ std::string("cannot open file '") + filename + std::string("'") };
+        std::ifstream str{filename, std::ios_base::binary};
+        if (!str) {
+          throw std::runtime_error{std::string("cannot open file '") + filename + std::string("'")};
+        }
         std::vector<uint8_t> extra_data;
         self.loadModel(str, &extra_data);
       })
@@ -208,7 +210,7 @@ void init_lda(Rice::Module& m) {
       "_removed_top_words",
       [](tomoto::ILDAModel& self, size_t rmTop) {
         Array res;
-        auto dict = self.getVocabDict();
+        const auto& dict = self.getVocabDict();
         size_t size = dict.size();
         for (size_t i = rmTop; i > 0; i--) {
           res.push(dict.toWord(size - i), false);
@@ -226,7 +228,7 @@ void init_lda(Rice::Module& m) {
       "_topic_words",
       [](tomoto::ILDAModel& self, size_t topicId, size_t topN) {
         Rice::Hash res;
-        for (auto const& v : self.getWordsByTopicSorted(topicId, topN)) {
+        for (const auto& v : self.getWordsByTopicSorted(topicId, topN)) {
           res[v.first] = v.second;
         }
         return res;
@@ -244,27 +246,27 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "used_vocab_df",
       [](tomoto::ILDAModel& self) {
-        auto vocab = self.getVocabDf();
+        const auto& vocab = self.getVocabDf();
         Array res;
         for (size_t i = 0; i < self.getV(); i++) {
-          res.push(vocab[i], false);
+          res.push(vocab.at(i), false);
         }
         return res;
       })
     .define_method(
       "used_vocab_freq",
       [](tomoto::ILDAModel& self) {
-        auto vocab = self.getVocabCf();
+        const auto& vocab = self.getVocabCf();
         Array res;
         for (size_t i = 0; i < self.getV(); i++) {
-          res.push(vocab[i], false);
+          res.push(vocab.at(i), false);
         }
         return res;
       })
     .define_method(
       "used_vocabs",
       [](tomoto::ILDAModel& self) {
-        auto dict = self.getVocabDict();
+        const auto& dict = self.getVocabDict();
         Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < self.getV(); i++) {
@@ -277,27 +279,25 @@ void init_lda(Rice::Module& m) {
     .define_method(
       "vocab_df",
       [](tomoto::ILDAModel& self) {
-        auto vocab = self.getVocabDf();
         Array res;
-        for (size_t i = 0; i < vocab.size(); i++) {
-          res.push(vocab[i], false);
+        for (const auto& v : self.getVocabDf()) {
+          res.push(v, false);
         }
         return res;
       })
     .define_method(
       "vocab_freq",
       [](tomoto::ILDAModel& self) {
-        auto vocab = self.getVocabCf();
         Array res;
-        for (size_t i = 0; i < vocab.size(); i++) {
-          res.push(vocab[i], false);
+        for (const auto& v : self.getVocabCf()) {
+          res.push(v, false);
         }
         return res;
       })
     .define_method(
       "vocabs",
       [](tomoto::ILDAModel& self) {
-        auto dict = self.getVocabDict();
+        const auto& dict = self.getVocabDict();
         Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {

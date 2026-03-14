@@ -26,7 +26,7 @@ void init_dmr(Rice::Module& m) {
       }, Rice::Return().takeOwnership())
     .define_method(
       "_add_doc",
-      [](tomoto::IDMRModel& self, std::vector<std::string> words, std::string metadata) {
+      [](tomoto::IDMRModel& self, std::vector<std::string> words, const std::string& metadata) {
         auto doc = buildDoc(words);
         doc.misc["metadata"] = metadata;
         return self.addDoc(doc);
@@ -55,7 +55,7 @@ void init_dmr(Rice::Module& m) {
     .define_method(
       "metadata_dict",
       [](tomoto::IDMRModel& self) {
-        auto dict = self.getMetadataDict();
+        const auto& dict = self.getMetadataDict();
         Array res;
         auto utf8 = Rice::Class(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {

@@ -15,7 +15,7 @@ void init_gdmr(Rice::Module& m) {
       [](size_t tw, size_t k, std::vector<uint64_t> degrees, tomoto::Float alpha, tomoto::Float sigma, tomoto::Float sigma0, tomoto::Float eta, tomoto::Float alpha_epsilon, size_t seed) {
         tomoto::GDMRArgs args;
         args.k = k;
-        args.degrees = degrees;
+        args.degrees = std::move(degrees);
         args.alpha = {alpha};
         args.sigma = sigma;
         args.sigma0 = sigma0;
