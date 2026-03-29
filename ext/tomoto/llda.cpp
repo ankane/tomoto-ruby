@@ -45,8 +45,8 @@ void init_llda(Rice::Module& m) {
         Rice::Array res;
         Rice::Object utf8 = Rice::Object(rb_cEncoding).call("const_get", "UTF_8");
         for (size_t i = 0; i < dict.size(); i++) {
-          VALUE value = Rice::detail::To_Ruby<std::string>().convert(dict.toWord(i));
-          res.push(Rice::Object(value).call("force_encoding", utf8), false);
+          Rice::String value(dict.toWord(i));
+          res.push(value.call("force_encoding", utf8), false);
         }
         return res;
       });
