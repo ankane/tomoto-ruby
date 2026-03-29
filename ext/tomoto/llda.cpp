@@ -43,9 +43,9 @@ void init_llda(Rice::Module& m) {
       [](tomoto::ILLDAModel& self) {
         const auto& dict = self.getTopicLabelDict();
         Rice::Array res;
-        Rice::Object utf8(Rice::Encoding::utf8());
+        Rice::Object utf8{Rice::Encoding::utf8()};
         for (size_t i = 0; i < dict.size(); i++) {
-          Rice::String value(dict.toWord(i));
+          Rice::String value{dict.toWord(i)};
           res.push(value.call("force_encoding", utf8), false);
         }
         return res;
