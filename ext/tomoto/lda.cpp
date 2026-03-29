@@ -272,7 +272,7 @@ void init_lda(Rice::Module& m) {
       [](tomoto::ILDAModel& self) {
         const auto& dict = self.getVocabDict();
         Rice::Array res;
-        Rice::Object utf8 = Rice::Object(rb_cEncoding).call("const_get", "UTF_8");
+        Rice::Object utf8(Rice::Encoding::utf8());
         for (size_t i = 0; i < self.getV(); i++) {
           Rice::String value(dict.toWord(i));
           res.push(value.call("force_encoding", utf8), false);
@@ -302,7 +302,7 @@ void init_lda(Rice::Module& m) {
       [](tomoto::ILDAModel& self) {
         const auto& dict = self.getVocabDict();
         Rice::Array res;
-        Rice::Object utf8 = Rice::Object(rb_cEncoding).call("const_get", "UTF_8");
+        Rice::Object utf8(Rice::Encoding::utf8());
         for (size_t i = 0; i < dict.size(); i++) {
           Rice::String value(dict.toWord(i));
           res.push(value.call("force_encoding", utf8), false);
