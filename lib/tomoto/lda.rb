@@ -123,7 +123,7 @@ module Tomoto
     def basic_info(summary)
       sum = used_vocab_freq.sum.to_f
       mapped = used_vocab_freq.map { |v| v / sum }
-      entropy = mapped.map { |v| v * Math.log(v) }.sum
+      entropy = mapped.sum { |v| v * Math.log(v) }
 
       summary << "| #{self.class.name.sub("Tomoto::", "")} (current version: #{VERSION})"
       summary << "| #{num_docs} docs, #{num_words} words"
